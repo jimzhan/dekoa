@@ -1,9 +1,9 @@
 {
-  "name": "koa-decos",
+  "name": "dekoa",
   "version": "0.2.1",
   "description": "Decorators for Koa",
   "main": "src/index.js",
-  "repository": "https://github.com/jimzhan/koa-decos",
+  "repository": "https://github.com/jimzhan/dekoa",
   "author": "Jim Zhan <jim.zhan@me.com>",
   "license": "Apache-2.0",
   "scripts": {
