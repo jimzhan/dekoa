@@ -1,5 +1,4 @@
 # dekoa - Decorators for Koa with :revolving_hearts:
-====================================================
 
 [![dependencies](https://david-dm.org/jimzhan/dekoa.svg)](https://david-dm.org/jimzhan/dekoa.svg)
 [![build](https://travis-ci.org/jimzhan/dekoa.svg?branch=master)](https://travis-ci.org/jimzhan/dekoa)
