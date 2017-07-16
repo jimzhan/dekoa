@@ -14,7 +14,7 @@
     "postpatch": "npm run push",
     "minor": "npm version minor",
     "postminor": "npm run push",
-    "push": "git push --tags"
+    "push": "git push --tags && npm publish"
   },
   "dependencies": {
     "cross-env": "^5.0.1",
