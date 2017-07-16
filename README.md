@@ -1,9 +1,10 @@
 # dekoa - Decorators for Koa with :revolving_hearts:
 
-[![dependencies](https://david-dm.org/jimzhan/dekoa.svg)](https://david-dm.org/jimzhan/dekoa.svg)
-[![build](https://travis-ci.org/jimzhan/dekoa.svg?branch=master)](https://travis-ci.org/jimzhan/dekoa)
-[![Coverage Status](https://coveralls.io/repos/github/jimzhan/dekoa/badge.svg?branch=master)](https://coveralls.io/github/jimzhan/dekoa?branch=master)
-[![npm version](https://img.shields.io/npm/v/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
+[![Node.js Version][node-image]][node-url]
+[![NPM version][npm-image]][npm-url]
+[![build status][travis-image]][travis-url]
+[![Dependency Status][dep-image]][dep-url]
+[![Coverage Status][cov-img]][cov-url]
 [![npm downloads](https://img.shields.io/npm/dm/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
 
 Supported [Koa](https://github.com/koajs/koa) >= v2.0.
@@ -71,7 +72,7 @@ npm install dekoa
 
     // `resource` decorator without prefix will be inject as top level URL.
     @resource
-    export default class Account {
+    export default class Auth {
       @POST('/login')
       async login(ctx) {
         ctx.status = Status.RESET_CONTENT;

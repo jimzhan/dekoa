@@ -1,5 +1,2 @@
-import * as route from './route';
-
-export {
-  route,
-};
+export * from './route';
+export * from './validators';
