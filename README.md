@@ -1,13 +1,10 @@
 # dekoa - Decorators for Koa with :revolving_hearts:
 
-[![Node.js Version][node-image]][node-url]
-[![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
-[![Dependency Status][dep-image]][dep-url]
-[![Coverage Status][cov-img]][cov-url]
+[![dependencies](https://david-dm.org/jimzhan/dekoa.svg)](https://david-dm.org/jimzhan/dekoa.svg)
+[![build](https://travis-ci.org/jimzhan/dekoa.svg?branch=master)](https://travis-ci.org/jimzhan/dekoa)
+[![npm version](https://img.shields.io/npm/v/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
 [![npm downloads](https://img.shields.io/npm/dm/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
 
-Supported [Koa](https://github.com/koajs/koa) >= v2.0.
 
 Handy decorators dedicated for Koa, batteris included:
 *  Class based routes supports.
