@@ -1,4 +1,4 @@
-import * as meta from './meta';
-
-export { meta };
-export { NS } from './consts';
+module.exports = {
+  meta: require('./meta'),
+  NS: require('./consts').NS,
+};

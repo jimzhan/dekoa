@@ -1,3 +1,6 @@
-export const NS = {
-  routes: '$routes',
+module.exports = {
+  NS: {
+    routes: '$routes',
+  },
 };
+
