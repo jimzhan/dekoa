@@ -23,7 +23,6 @@
     "http-status-codes": "^1.1.6",
     "immutable": "^3.8.1",
     "keymirror": "^0.1.1",
-    "koa-body": "^2.3.0",
     "koa-router": "^7.2.1"
   },
   "devDependencies": {
@@ -42,6 +41,7 @@
     "eslint-import-resolver-babel-module": "^3.0.0",
     "eslint-plugin-import": "^2.7.0",
     "koa": "^2.3.0",
+    "koa-body": "^2.3.0",
     "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
     "supertest": "^3.0.0"

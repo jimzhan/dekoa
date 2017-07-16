@@ -1,7 +1,6 @@
 import debug from 'debug';
 import glob from 'glob';
 import { posix } from 'path';
-import Body from 'koa-body';
 import Router from 'koa-router';
 import { NS, meta } from './private';
 
@@ -116,7 +115,6 @@ export function DELETE(pattern) {
 export const bind = (server, pattern, options = {}) => {
   const paths = glob.sync(pattern);
   const router = options.prefix ? new Router({ prefix: options.prefix }) : new Router();
-  const body = Body({ strict: false });
 
   Object.values(paths).forEach((abspath) => {
     // eslint-disable-next-line
@@ -125,7 +123,7 @@ export const bind = (server, pattern, options = {}) => {
       const subroutes = meta.get(Class, NS.routes);
       const instance = new Class();
       Object.values(subroutes).forEach((route) => {
-        router[route.method](route.view, route.pattern, body, instance[route.view]);
+        router[route.method](route.view, route.pattern, instance[route.view]);
       });
     });
   });
