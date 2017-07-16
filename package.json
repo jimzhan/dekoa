@@ -1,6 +1,6 @@
 {
   "name": "dekoa",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Decorators for Koa",
   "main": "src/index.js",
   "repository": "https://github.com/jimzhan/dekoa",
