@@ -1,9 +1,10 @@
 # dekoa - Decorators for Koa with :revolving_hearts:
 
-[![dependencies](https://david-dm.org/jimzhan/dekoa.svg)](https://david-dm.org/jimzhan/dekoa.svg)
 [![build](https://travis-ci.org/jimzhan/dekoa.svg?branch=master)](https://travis-ci.org/jimzhan/dekoa)
+[![Coverage Status](https://coveralls.io/repos/github/jimzhan/dekoa/badge.svg?branch=master)](https://coveralls.io/github/jimzhan/dekoa?branch=master)
 [![npm version](https://img.shields.io/npm/v/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
 [![npm downloads](https://img.shields.io/npm/dm/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
+[![dependencies](https://david-dm.org/jimzhan/dekoa.svg)](https://david-dm.org/jimzhan/dekoa.svg)
 
 
 Handy decorators dedicated for Koa, batteris included:
@@ -44,7 +45,7 @@ npm install dekoa
     ```js
     // src/resources/accounts.js
     import Status from 'http-status-codes';
-    import { resource, GET, POST } from 'dekoa/route';
+    import { resource, GET, POST } from 'dekoa';
 
     @resource('accounts')
     export default class Account {
@@ -65,7 +66,7 @@ npm install dekoa
 
     ```js
     import Status from 'http-status-codes';
-    import { resource, POST } from 'dekoa/route';
+    import { resource, POST } from 'dekoa';
 
     // `resource` decorator without prefix will be inject as top level URL.
     @resource
@@ -81,4 +82,3 @@ npm install dekoa
       }
     }
     ```
-
