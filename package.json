@@ -2,11 +2,12 @@
   "name": "dekoa",
   "version": "0.2.8",
   "description": "Decorators for Koa",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/jimzhan/dekoa",
   "author": "Jim Zhan <jim.zhan@me.com>",
   "license": "Apache-2.0",
   "scripts": {
+    "build": "babel -d dist/ src/",
     "lint": "eslint --ext=.js src test",
     "test": "cross-env DEBUG={debug},{test.spec} mocha --timeout 10000 --compilers js:babel-core/register --recursive ./**/*.spec.js",
     "[VERSION]": "======= Semantic Versioning =======",
