@@ -8,7 +8,7 @@
 
 Handy decorators dedicated for Koa, batteris included:
 * Class based routes supports (full HTTP method supports, [RFC7231](https://tools.ietf.org/html/rfc7231#section-4)).
-* various validators (`form`, `query` etc.) 
+* various validators (`form`, `query` etc.)
 
 ## Installation
 
@@ -71,7 +71,7 @@ npm install dekoa
   // `resource` decorator without prefix will be inject as top level URL.
   @resource
   export default class Auth {
-    @POST('/login')
+    @post('/login')
     async login(ctx) {
       ctx.status = Status.RESET_CONTENT;
     }
