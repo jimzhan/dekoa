@@ -47,7 +47,7 @@ describe('[route]', () => {
       expect(order.id).to.equal('123');
     });
 
-    it('shoud create a new order', async () => {
+    it('should create a new order', async () => {
       const response = await request.post('/v1/orders/').send({ id: 123, name: 'new' });
       const order = response.body;
       expect(response.status).to.equal(Status.CREATED);
