@@ -1,6 +1,6 @@
 {
   "name": "dekoa",
-  "version": "0.3.0",
+  "version": "0.6.0",
   "description": "Decorators for Koa",
   "main": "src/index.js",
   "repository": "https://github.com/jimzhan/dekoa",
@@ -15,7 +15,7 @@
     "postpatch": "npm run push",
     "minor": "npm version minor",
     "postminor": "npm run push",
-    "push": "git push --tags && npm publish"
+    "push": "git push && git push --tags && npm publish"
   },
   "dependencies": {
     "babel-preset-env": "^1.6.0",
