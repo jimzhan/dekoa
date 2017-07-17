@@ -9,7 +9,7 @@
   "scripts": {
     "build": "babel -d dist/ src/",
     "lint": "eslint --ext=.js src test",
-    "test": "cross-env DEBUG={debug},{validators},{test.spec} mocha --timeout 10000 --compilers js:babel-core/register --recursive ./**/*.spec.js",
+    "test": "cross-env DEBUG={debug},{route},{validators},{test.spec} nyc mocha --timeout 10000 --compilers js:babel-core/register --recursive ./**/*.spec.js",
     "[VERSION]": "======= Semantic Versioning =======",
     "patch": "npm version patch",
     "postpatch": "npm run push",
@@ -45,6 +45,7 @@
     "koa-body": "^2.3.0",
     "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
+    "nyc": "^11.0.3",
     "supertest": "^3.0.0"
   }
 }
