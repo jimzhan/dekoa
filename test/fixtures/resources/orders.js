@@ -1,15 +1,15 @@
 import Status from 'http-status-codes';
-import { resource, GET, POST } from 'route';
+import { resource, get, post } from 'route';
 
 @resource('orders')
 export default class Account {
-  @GET('/:id')
+  @get('/:id')
   async findById(ctx) {
     ctx.status = Status.OK;
     ctx.body = { id: ctx.params.id, status: Status.OK };
   }
 
-  @POST('/')
+  @post('/')
   async create(ctx) {
     const params = ctx.request.body;
     ctx.status = Status.CREATED;

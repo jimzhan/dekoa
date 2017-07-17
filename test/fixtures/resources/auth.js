@@ -1,14 +1,14 @@
 import Status from 'http-status-codes';
-import { resource, POST } from 'route';
+import { resource, post } from 'route';
 
 @resource
 export default class Account {
-  @POST('/login')
+  @post('/login')
   async login(ctx) {
     ctx.status = Status.RESET_CONTENT;
   }
 
-  @POST('/logout')
+  @post('/logout')
   async logout(ctx) {
     ctx.status = Status.RESET_CONTENT;
   }

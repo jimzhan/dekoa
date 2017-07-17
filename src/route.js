@@ -80,31 +80,79 @@ module.exports = {
   },
 
   /**
+   * The GET method requests a representation of the specified resource. 
+   * Requests using GET should only retrieve data.
    * @param {String} pattern GET resource URL pattern.
    */
-  GET(pattern) {
+  get(pattern) {
     return map('get', pattern);
   },
 
   /**
+   * The HEAD method asks for a response identical to that of a GET request,
+   * but without the response body. 
+   * @param {String} pattern HEAD resource URL pattern.
+   */
+  head(pattern) {
+    return map('head', pattern);
+  },
+
+  /**
+   * The POST method is used to submit an entity to the specified resource,
+   * often causing a change in state or side effects on the server 
    * @param {String} pattern POST resource URL pattern.
    */
-  POST(pattern) {
+  post(pattern) {
     return map('post', pattern);
   },
 
   /**
+   * The PUT method replaces all current representations of the target
+   * resource with the request payload. 
    * @param {String} pattern PUT resource URL pattern.
    */
-  PUT(pattern) {
+  put(pattern) {
     return map('put', pattern);
   },
 
   /**
+   * The DELETE method deletes the specified resource.
    * @param {String} pattern DELETE resource URL pattern.
    */
-  DELETE(pattern) {
+  del(pattern) {
     return map('delete', pattern);
+  },
+
+  /**
+   * The CONNECT method establishes a tunnel to the server identified by the target resource. 
+   * @param {String} pattern CONNECT resource URL pattern.
+   */
+  connect(pattern) {
+    return map('connect', pattern);
+  },
+
+  /**
+   * The OPTIONS method is used to describe the communication options for the target resource.
+   * @param {String} pattern OPTIONS resource URL pattern.
+   */
+  options(pattern) {
+    return map('options', pattern);
+  },
+
+  /**
+   * The TRACE method performs a message loop-back test along the path to the target resource. 
+   * @param {String} pattern TRACE resource URL pattern.
+   */
+  trace(pattern) {
+    return map('trace', pattern);
+  },
+
+  /**
+   * The PATCH method is used to apply partial modifications to a resource.
+   * @param {String} pattern PATCH resource URL pattern.
+   */
+  patch(pattern) {
+    return map('patch', pattern);
   },
 
   /**

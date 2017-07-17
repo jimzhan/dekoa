@@ -7,7 +7,8 @@
 
 
 Handy decorators dedicated for Koa, batteris included:
-*  Class based routes supports.
+* Class based routes supports (full HTTP method supports, [RFC7231](https://tools.ietf.org/html/rfc7231#section-4)).
+* various validators (`form`, `query` etc.) 
 
 ## Installation
 
@@ -44,18 +45,18 @@ npm install dekoa
   ```javascript
   // src/resources/accounts.js
   import Status from 'http-status-codes';
-  import { resource, GET, POST } from 'dekoa';
+  import { resource, get, post } from 'dekoa';
 
   @resource('accounts')
   export default class Account {
-    @GET('/:id')
+    @get('/:id')
     async findById(ctx) {
       const params = ctx.params;
       ctx.status = Status.OK;
       ctx.body = { id: params.id, username: 'test@example.com' };
     }
 
-    @POST('/')
+    @post('/')
     async create(ctx) {
       ctx.status = Status.CREATED;
       ctx.body = { username: 'test@example.com' };
@@ -65,7 +66,7 @@ npm install dekoa
 
   ```javascript
   import Status from 'http-status-codes';
-  import { resource, POST } from 'dekoa';
+  import { resource, post } from 'dekoa';
 
   // `resource` decorator without prefix will be inject as top level URL.
   @resource
@@ -75,7 +76,7 @@ npm install dekoa
       ctx.status = Status.RESET_CONTENT;
     }
 
-    @POST('/logout')
+    @post('/logout')
     async logout(ctx) {
       ctx.status = Status.RESET_CONTENT;
     }
@@ -88,7 +89,7 @@ npm install dekoa
   @resource('inputs')
   export default class Input {
     @form({ username: regex.email })
-    @POST('/')
+    @post('/')
     async create(ctx) {
       ctx.status = Status.CREATED;
       ctx.body = { username: 'test@example.com' };
