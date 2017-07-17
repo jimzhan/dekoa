@@ -1,4 +1,5 @@
 const route = require('./route');
+const validators = require('./validators');
 
 module.exports = {
   bind: route.bind,
@@ -7,4 +8,5 @@ module.exports = {
   POST: route.POST,
   PUT: route.PUT,
   DELETE: route.DELETE,
+  form: validators.form,
 };

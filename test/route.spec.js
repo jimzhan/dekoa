@@ -8,7 +8,7 @@ import server from './fixtures/server';
 const log = debug('{test.spec}');
 const request = supertest.agent(server.listen());
 
-describe('[spec][route]', () => {
+describe('[route]', () => {
   describe('/v1/accounts', () => {
     it('should find account name `test@example.com`', async () => {
       const response = await request.get('/v1/accounts/123');
