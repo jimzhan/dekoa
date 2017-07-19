@@ -96,3 +96,14 @@ npm install dekoa
     }
   }
   ```
+
+## Regular Expression Helpers
+
+- `dekoa.regex.chinese` - chinese characters.
+- `dekoa.regex.email` - email address.
+- `dekoa.regex.password` - valid password (>= 6 bits, includes at least 1 lower & 1 upper letter, 1 number & 1 special character).
+- `dekoa.regex.integer` - positive/negative integer.
+- `dekoa.regex.number` - positive/negative number.
+- `dekoa.regex.url` - http/ftp/file address.
+- `dekoa.regex.ipv4` - IP address version 4.
+

@@ -5,11 +5,11 @@ const log = debug('{validators}');
 
 module.exports = {
   /**
-   * 
+   *
    * @param {Object} fields list for validation, supported validators (RegExp & Function). e.g
    *  ```javascript
    *  @form({ username: regex.email })
-   * 
+   *
    *  @form({ metadata: isJSON })
    *  ```
    */
@@ -17,6 +17,11 @@ module.exports = {
     const decorator = (target, name, descriptor) => {
       // [decorator] checkpoint before actual/next view handler.
       const runner = async (ctx, next) => {
+        if (!ctx.request.body) {
+          log('Request body is empty, `koa-body` missing?');
+          ctx.throw(Status.INTERNAL_SERVER_ERROR);
+        }
+
         const form = ctx.request.body;
         Object.entries(fields).forEach(([field, validator]) => {
           // fields passed in here are all required.
