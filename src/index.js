@@ -15,4 +15,5 @@ module.exports = {
   trace: route.trace,
   patch: route.patch,
   form: validators.form,
+  query: validators.query,
 };
