@@ -1,6 +1,6 @@
 import Status from 'http-status-codes';
-import { resource, post, put, del } from 'route';
-import { form } from 'validators';
+import { resource, get, post, put, del } from 'route';
+import { form, query } from 'validators';
 import * as regex from 'regex';
 
 function isValidEmail(email) {
@@ -9,6 +9,13 @@ function isValidEmail(email) {
 
 @resource('inputs')
 export default class Input {
+  @query({ username: regex.email })
+  @get('/')
+  async find(ctx) {
+    ctx.status = Status.OK;
+    ctx.body = [{ username: 'test@example.com' }];
+  }
+
   @form({ username: regex.email })
   @post('/')
   async create(ctx) {

@@ -97,6 +97,20 @@ npm install dekoa
   }
   ```
 
+* validators.js#query(fields)
+
+  ```javascript
+  @resource('inputs')
+  export default class Input {
+    @query({ username: regex.email })
+    @post('/')
+    async create(ctx) {
+      ctx.status = Status.CREATED;
+      ctx.body = { username: 'test@example.com' };
+    }
+  }
+  ```
+
 ## Regular Expression Helpers
 
 - `dekoa.regex.chinese` - chinese characters.
