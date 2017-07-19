@@ -7,7 +7,7 @@ const { NS, meta } = require('./private');
 const log = debug('{route}');
 
 /**
- * Find all declared subroutes & bind them into class's descriptor. 
+ * Find all declared subroutes & bind them into class's descriptor.
  * @param {Class} target resource class to be bound.
  * @param {String} prefix URL prefix for resource.
  */
@@ -21,7 +21,7 @@ function bindClassRoutes(target, prefix = '/') {
       pattern: prefix ? posix.join(prefix, item.pattern) : item.pattern,
     };
     routes.push(route);
-    log(`${route.method.toUpperCase()}\t\t${route.pattern}`);
+    log(`${route.method.toUpperCase()}     ${route.pattern}`);
   });
   meta.set(target, NS.routes, routes);
 }
@@ -54,15 +54,15 @@ module.exports = {
    * ```
    * @resource
    * class User {
-   *    ... 
+   *    ...
    * }
-   * 
+   *
    * @resource('accounts')
    * class Account {
-   *    ... 
+   *    ...
    * }
    * ```
-   * 
+   *
    * @returns - Optional returned regular decorator for initialized resource (with URL prefix).
    */
   resource(obj) {
@@ -80,7 +80,7 @@ module.exports = {
   },
 
   /**
-   * The GET method requests a representation of the specified resource. 
+   * The GET method requests a representation of the specified resource.
    * Requests using GET should only retrieve data.
    * @param {String} pattern GET resource URL pattern.
    */
@@ -90,7 +90,7 @@ module.exports = {
 
   /**
    * The HEAD method asks for a response identical to that of a GET request,
-   * but without the response body. 
+   * but without the response body.
    * @param {String} pattern HEAD resource URL pattern.
    */
   head(pattern) {
@@ -99,7 +99,7 @@ module.exports = {
 
   /**
    * The POST method is used to submit an entity to the specified resource,
-   * often causing a change in state or side effects on the server 
+   * often causing a change in state or side effects on the server
    * @param {String} pattern POST resource URL pattern.
    */
   post(pattern) {
@@ -108,7 +108,7 @@ module.exports = {
 
   /**
    * The PUT method replaces all current representations of the target
-   * resource with the request payload. 
+   * resource with the request payload.
    * @param {String} pattern PUT resource URL pattern.
    */
   put(pattern) {
@@ -124,7 +124,7 @@ module.exports = {
   },
 
   /**
-   * The CONNECT method establishes a tunnel to the server identified by the target resource. 
+   * The CONNECT method establishes a tunnel to the server identified by the target resource.
    * @param {String} pattern CONNECT resource URL pattern.
    */
   connect(pattern) {
@@ -140,7 +140,7 @@ module.exports = {
   },
 
   /**
-   * The TRACE method performs a message loop-back test along the path to the target resource. 
+   * The TRACE method performs a message loop-back test along the path to the target resource.
    * @param {String} pattern TRACE resource URL pattern.
    */
   trace(pattern) {
@@ -156,7 +156,7 @@ module.exports = {
   },
 
   /**
-   * Search and register all available class view handerls to Koa instance. 
+   * Search and register all available class view handerls to Koa instance.
    * @param {Object} server Koa instance.
    * @param {String} pattern string pattern for glob to search view (class) handlers.
    * @param {Object} options detailed settings (incl. root prefix).
