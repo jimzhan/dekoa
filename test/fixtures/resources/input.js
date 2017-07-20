@@ -8,6 +8,7 @@ function isValidEmail(email) {
   return regex.email.test(email);
 }
 
+@use(Body({ strict: false }))
 @resource('inputs')
 export default class Input {
   @query({ username: regex.email })

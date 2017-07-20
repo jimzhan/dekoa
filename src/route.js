@@ -185,16 +185,23 @@ module.exports = {
    */
   use(middleware) {
     const decorator = (target, name, descriptor) => {
-      const routes = meta.get(target, NS.routes) || [];
-      Object.entries(routes).forEach(([index, route]) => {
-        if (route.view === name) {
-          const mws = route.middleware || [];
-          mws.push(middleware);
-          route.middleware = mws; // eslint-disable-line
-          routes[index] = route;
-        }
-      });
-      meta.set(target, NS.routes, routes);
+      if (meta.hasPrototype(target)) {
+        // class-level decorator.
+        const mws = meta.get(target, NS.middleware) || [];
+        mws.push(middleware);
+        meta.set(target, NS.middleware, mws);
+      } else {
+        const routes = meta.get(target, NS.routes) || [];
+        Object.entries(routes).forEach(([index, route]) => {
+          if (route.view === name) {
+            const mws = route.middleware || [];
+            mws.push(middleware);
+            route.middleware = mws; // eslint-disable-line
+            routes[index] = route;
+          }
+        });
+        meta.set(target, NS.routes, routes);
+      }
       return descriptor;
     };
     return decorator;
