@@ -1,5 +1,6 @@
 import Status from 'http-status-codes';
-import { resource, get, post, put, del } from 'route';
+import Body from 'koa-body';
+import { resource, get, post, put, del, use } from 'route';
 import { form, query } from 'validators';
 import * as regex from 'regex';
 
@@ -30,6 +31,7 @@ export default class Input {
     ctx.body = { username: 'test@example.com' };
   }
 
+  @use(Body({ strict: false }))
   @del('/:id')
   async remove(ctx) {
     ctx.status = Status.NO_CONTENT;

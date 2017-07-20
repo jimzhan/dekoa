@@ -15,13 +15,11 @@ function bindClassRoutes(target, prefix = '/') {
   const routes = [];
   const subroutes = meta.get(target, NS.routes) || [];
   Object.values(subroutes).forEach((item) => {
-    const route = {
-      view: item.view,
-      method: item.method,
+    const route = Object.assign(item, {
       pattern: prefix ? posix.join(prefix, item.pattern) : item.pattern,
-    };
+    });
     routes.push(route);
-    log(`${route.method.toUpperCase()}     ${route.pattern}`);
+    log(`${route.method.toUpperCase()} \t ${route.pattern}`);
   });
   meta.set(target, NS.routes, routes);
 }
@@ -31,7 +29,8 @@ function bindClassRoutes(target, prefix = '/') {
  *  {
  *    method: '<HEAD | GET | POST | PUT | PATCH | DELETE>',
  *    pattern: 'path-pattern-here',
- *    view: '<Object>'
+ *    view: 'string' => function name.
+ *    middleware: list of middleware.
  *  }
  * @param {String} method HTTP method.
  * @param {String} pattern HTTP request pattern/path.
@@ -172,10 +171,32 @@ module.exports = {
         const subroutes = meta.get(Class, NS.routes);
         const instance = new Class();
         Object.values(subroutes).forEach((route) => {
-          router[route.method](route.view, route.pattern, instance[route.view]);
+          const handler = instance[route.view];
+          router[route.method](route.view, route.pattern, handler);
         });
       });
     });
     server.use(router.routes()).use(router.allowedMethods());
+  },
+
+  /**
+   * Ad-hoc Middlware support to function (FOR NOW).
+   * @param {function} middleware additonal mw wrapper to function.
+   */
+  use(middleware) {
+    const decorator = (target, name, descriptor) => {
+      const routes = meta.get(target, NS.routes) || [];
+      Object.entries(routes).forEach(([index, route]) => {
+        if (route.view === name) {
+          const mws = route.middleware || [];
+          mws.push(middleware);
+          route.middleware = mws; // eslint-disable-line
+          routes[index] = route;
+        }
+      });
+      meta.set(target, NS.routes, routes);
+      return descriptor;
+    };
+    return decorator;
   },
 };
