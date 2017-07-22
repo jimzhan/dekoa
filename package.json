@@ -10,7 +10,7 @@
     "build": "babel -d dist/ src/",
     "lint": "eslint --ext=.js src test",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "test": "cross-env DEBUG={debug},{route},{validators},{test.spec} nyc mocha --timeout 10000 --compilers js:babel-core/register --recursive ./**/*.spec.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test": "cross-env DEBUG={debug},{route},{validators},{test.spec} nyc --reporter=html --reporter=text mocha --timeout 10000 --compilers js:babel-core/register --recursive ./**/*.spec.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "[VERSION]": "======= Semantic Versioning =======",
     "patch": "npm version patch",
     "postpatch": "npm run push",
