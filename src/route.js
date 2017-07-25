@@ -16,7 +16,7 @@ function bindClassRoutes(target, prefix = '/') {
       pattern: prefix ? posix.join(prefix, item.pattern) : item.pattern,
     });
     routes.push(route);
-    log(`${route.method.toUpperCase()} \t ${route.pattern}`);
+    log(`${route.method.toUpperCase()}${route.method === 'delete' ? ' ' : ' \t '}${route.pattern}`);
   });
   meta.set(target, NS.routes, routes);
 }

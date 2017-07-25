@@ -1,9 +1,10 @@
 const route = require('./route');
-const validators = require('./validators');
+const schema = require('./schema');
 
 module.exports = {
   bind: route.bind,
   resource: route.resource,
+  /* Standard HTTP Methods */
   get: route.get,
   head: route.head,
   post: route.post,
@@ -14,6 +15,8 @@ module.exports = {
   options: route.options,
   trace: route.trace,
   patch: route.patch,
-  form: validators.form,
-  query: validators.query,
+  /* JSON Schema based validators */
+  form: schema.form,
+  query: schema.query,
+  validate: schema.validate,
 };

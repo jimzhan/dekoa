@@ -1,11 +1,11 @@
 import Status from 'http-status-codes';
 import { resource, post, put, del } from 'route';
-import schema from 'schema';
-
+import { form } from 'schema';
+import { NewAccount } from '../schema';
 
 @resource('schema')
 export default class Schema {
-  @schema(`${__dirname}/schema/NewAccount.json`)
+  @form(NewAccount)
   @post('/')
   async create(ctx) {
     ctx.status = Status.CREATED;

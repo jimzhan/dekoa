@@ -1,7 +1,6 @@
 # dekoa - Decorators for Koa with :revolving_hearts:
 
 [![build](https://travis-ci.org/jimzhan/dekoa.svg?branch=master)](https://travis-ci.org/jimzhan/dekoa)
-[![Coverage Status](https://coveralls.io/repos/github/jimzhan/dekoa/badge.svg)](https://coveralls.io/github/jimzhan/dekoa)
 [![npm version](https://img.shields.io/npm/v/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
 [![npm downloads](https://img.shields.io/npm/dm/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
 [![dependencies](https://david-dm.org/jimzhan/dekoa.svg)](https://david-dm.org/jimzhan/dekoa.svg)
@@ -9,7 +8,7 @@
 
 Handy decorators dedicated for Koa, batteris included:
 * Class based routes supports (full HTTP method supports, [RFC7231](https://tools.ietf.org/html/rfc7231#section-4)).
-* various validators (`form`, `query` etc.)
+* [JSON Schema](http://json-schema.org/) based validators (`form`, `query`, `path`).
 
 ## Installation
 
@@ -84,12 +83,35 @@ npm install dekoa
   }
   ```
 
-* validators.js#form(fields)
+* JSON Schema, e.g. `NewAccount.json`.
 
   ```javascript
+  {
+    "properties": {
+      "username": {
+        "type": "string",
+        "format": "email",
+        "minLength": 5,
+        "maxLength": 255
+      },
+      "password": {
+        "type": "string",
+        "minLength": 6,
+        "maxLength": 20
+      }
+    },
+    "required": ["username", "password"]
+  }
+  ```
+
+* validators.js#form(<Schema>)
+
+  ```javascript
+  const NewAccount = require('./NewAccount.json')
+
   @resource('inputs')
   export default class Input {
-    @form({ username: regex.email })
+    @form(NewAccount)
     @post('/')
     async create(ctx) {
       ctx.status = Status.CREATED;
@@ -98,12 +120,14 @@ npm install dekoa
   }
   ```
 
-* validators.js#query(fields)
+* validators.js#query(<Schema>)
 
   ```javascript
+  const Account = require('./Account.json')
+
   @resource('inputs')
   export default class Input {
-    @query({ username: regex.email })
+    @query(Account)
     @post('/')
     async create(ctx) {
       ctx.status = Status.CREATED;

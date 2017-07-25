@@ -1,10 +1,10 @@
 
-module.exports.get = (target, key) => {
+const get = (target, key) => {
   const descriptor = Object.getOwnPropertyDescriptor(target.prototype || target, key);
   return descriptor && descriptor.value;
 };
 
-module.exports.set = (target, key, value) => {
+const set = (target, key, value) => {
   Object.defineProperty(target.prototype || target, key, {
     value,
     enumerable: false,
@@ -13,5 +13,22 @@ module.exports.set = (target, key, value) => {
   });
 };
 
-module.exports.isClass = cls => typeof cls === 'function' && /^\s*class\s+/.test(cls.toString());
+/**
+ * Clone a writable Target.descriptor with given value.
+ * @param {Object} descriptor existing Target's descriptor to be cloned.
+ * @param {Object} value Target's description value to be added.
+ */
+const describe = (descriptor, value) => { // eslint-disable-line
+  return {
+    value,
+    writable: descriptor.writable,
+    enumerable: descriptor.enumerable,
+    configurable: descriptor.configurable,
+  };
+};
 
+
+const isClass = cls => typeof cls === 'function' && /^\s*class\s+/.test(cls.toString());
+
+
+module.exports = { get, set, describe, isClass };
