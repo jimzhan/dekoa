@@ -2,7 +2,7 @@ const glob = require('glob');
 const debug = require('debug');
 const posix = require('path').posix;
 const Router = require('koa-router');
-const { NS, meta, m2 } = require('./private');
+const { NS, meta } = require('./private');
 
 const log = debug('{route}');
 
@@ -185,7 +185,7 @@ module.exports = {
    */
   use(middleware) {
     const decorator = (target, name, descriptor) => {
-      if (meta.hasPrototype(target)) {
+      if (target.prototype) {
         // class-level decorator.
         const mws = meta.get(target, NS.middleware) || [];
         mws.push(middleware);
