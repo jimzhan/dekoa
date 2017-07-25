@@ -18,6 +18,8 @@
     "push": "git push && git push --tags && npm publish"
   },
   "dependencies": {
+    "ajv": "^5.2.2",
+    "assert": "^1.4.1",
     "glob": "^7.1.2",
     "http-status-codes": "^1.1.6",
     "immutable": "^3.8.1",

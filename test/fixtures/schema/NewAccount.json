@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "username": {
+      "type": "string",
+      "format": "email",
+      "minLength": 5,
+      "maxLength": 255
+    },
+    "password": {
+      "type": "string",
+      "minLength": 6,
+      "maxLength": 20
+    }
+  },
+  "required": ["username", "password"]
+}
