@@ -1,11 +1,8 @@
-import debug from 'debug';
 import supertest from 'supertest';
 import { expect } from 'chai';
 import Status from 'http-status-codes';
 import server from './fixtures/server';
 
-// eslint-disable-next-line
-const log = debug('{test.spec}');
 const request = supertest.agent(server.listen());
 const url = '/v1/inputs/';
 

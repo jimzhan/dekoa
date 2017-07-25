@@ -1,7 +1,5 @@
-const debug = require('debug');
 const Status = require('http-status-codes');
-
-const log = debug('{validators}');
+const { log } = require('./private');
 
 /**
  * Common validation helper for incomingprequest values checking.

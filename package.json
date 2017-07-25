@@ -9,7 +9,7 @@
   "scripts": {
     "build": "babel -d dist/ src/",
     "lint": "eslint --ext=.js src test",
-    "test": "cross-env DEBUG={debug},{route},{validators},{test.spec} nyc mocha --timeout 10000 --compilers js:babel-core/register --recursive $(find . -name '*.spec.js')",
+    "test": "cross-env DEBUG={dekoa} nyc mocha --timeout 10000 --compilers js:babel-core/register --recursive $(find . -name '*.spec.js')",
     "[VERSION]": "======= Semantic Versioning =======",
     "patch": "npm version patch",
     "postpatch": "npm run push",
