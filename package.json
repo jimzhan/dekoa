@@ -9,7 +9,7 @@
   "scripts": {
     "build": "babel -d dist/ src/",
     "lint": "eslint --ext=.js src test",
-    "test": "cross-env DEBUG={debug},{route},{validators},{test.spec} nyc mocha --timeout 10000 --compilers js:babel-core/register --recursive ./**/*.spec.js",
+    "test": "cross-env DEBUG={debug},{route},{validators},{test.spec} nyc mocha --timeout 10000 --compilers js:babel-core/register --recursive $(find . -name '*.spec.js')",
     "[VERSION]": "======= Semantic Versioning =======",
     "patch": "npm version patch",
     "postpatch": "npm run push",
@@ -25,7 +25,8 @@
     "http-status-codes": "^1.1.6",
     "immutable": "^3.8.1",
     "keymirror": "^0.1.1",
-    "koa-router": "^7.2.1"
+    "koa-router": "^7.2.1",
+    "reflect-metadata": "^0.1.10"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

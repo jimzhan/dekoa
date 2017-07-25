@@ -2,7 +2,7 @@ const glob = require('glob');
 const debug = require('debug');
 const posix = require('path').posix;
 const Router = require('koa-router');
-const { NS, meta } = require('./private');
+const { NS, meta, m2 } = require('./private');
 
 const log = debug('{route}');
 
