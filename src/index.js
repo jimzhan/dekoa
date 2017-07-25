@@ -1,5 +1,5 @@
-const route = require('./route');
-const schema = require('./schema');
+const route = require('./route')
+const schema = require('./schema')
 
 module.exports = {
   bind: route.bind,
@@ -18,5 +18,5 @@ module.exports = {
   /* JSON Schema based validators */
   form: schema.form,
   query: schema.query,
-  validate: schema.validate,
-};
+  validate: schema.validate
+}

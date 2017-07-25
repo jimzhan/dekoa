@@ -1,24 +1,24 @@
-const glob = require('glob');
-const posix = require('path').posix;
-const Router = require('koa-router');
-const { NS, log, meta } = require('./private');
+const glob = require('glob')
+const posix = require('path').posix
+const Router = require('koa-router')
+const { NS, log, meta } = require('./private')
 
 /**
  * Find all declared subroutes & bind them into class's descriptor.
  * @param {Class} target resource class to be bound.
  * @param {String} prefix URL prefix for resource.
  */
-function bindClassRoutes(target, prefix = '/') {
-  const routes = [];
-  const subroutes = meta.get(target, NS.routes) || [];
+function bindClassRoutes (target, prefix = '/') {
+  const routes = []
+  const subroutes = meta.get(target, NS.routes) || []
   Object.values(subroutes).forEach((item) => {
     const route = Object.assign(item, {
-      pattern: prefix ? posix.join(prefix, item.pattern) : item.pattern,
-    });
-    routes.push(route);
-    log(`${route.method.toUpperCase()}${route.method === 'delete' ? ' ' : ' \t '}${route.pattern}`);
-  });
-  meta.set(target, NS.routes, routes);
+      pattern: prefix ? posix.join(prefix, item.pattern) : item.pattern
+    })
+    routes.push(route)
+    log(`${route.method.toUpperCase()}${route.method === 'delete' ? ' ' : ' \t '}${route.pattern}`)
+  })
+  meta.set(target, NS.routes, routes)
 }
 
 /**
@@ -32,16 +32,15 @@ function bindClassRoutes(target, prefix = '/') {
  * @param {String} method HTTP method.
  * @param {String} pattern HTTP request pattern/path.
  */
-function map(method, pattern) {
+function map (method, pattern) {
   const decorator = (target, name, descriptor) => {
-    const routes = meta.get(target, NS.routes) || [];
-    routes.push({ method, pattern, view: name });
-    meta.set(target, NS.routes, routes);
-    return descriptor;
-  };
-  return decorator;
+    const routes = meta.get(target, NS.routes) || []
+    routes.push({ method, pattern, view: name })
+    meta.set(target, NS.routes, routes)
+    return descriptor
+  }
+  return decorator
 }
-
 
 module.exports = {
   /**
@@ -61,16 +60,16 @@ module.exports = {
    *
    * @returns - Optional returned regular decorator for initialized resource (with URL prefix).
    */
-  resource(obj) {
+  resource (obj) {
     if (meta.isClass(obj)) {
-      bindClassRoutes(obj, '/');
-      return;
+      bindClassRoutes(obj, '/')
+      return
     }
     const decorator = (target, name, descriptor) => {
-      const prefix = typeof obj === 'string' ? obj : '/';
-      bindClassRoutes(target, posix.join('/', prefix));
-      return descriptor;
-    };
+      const prefix = typeof obj === 'string' ? obj : '/'
+      bindClassRoutes(target, posix.join('/', prefix))
+      return descriptor
+    }
     // eslint-disable-next-line
     return decorator;
   },
@@ -80,8 +79,8 @@ module.exports = {
    * Requests using GET should only retrieve data.
    * @param {String} pattern GET resource URL pattern.
    */
-  get(pattern) {
-    return map('get', pattern);
+  get (pattern) {
+    return map('get', pattern)
   },
 
   /**
@@ -89,8 +88,8 @@ module.exports = {
    * but without the response body.
    * @param {String} pattern HEAD resource URL pattern.
    */
-  head(pattern) {
-    return map('head', pattern);
+  head (pattern) {
+    return map('head', pattern)
   },
 
   /**
@@ -98,8 +97,8 @@ module.exports = {
    * often causing a change in state or side effects on the server
    * @param {String} pattern POST resource URL pattern.
    */
-  post(pattern) {
-    return map('post', pattern);
+  post (pattern) {
+    return map('post', pattern)
   },
 
   /**
@@ -107,48 +106,48 @@ module.exports = {
    * resource with the request payload.
    * @param {String} pattern PUT resource URL pattern.
    */
-  put(pattern) {
-    return map('put', pattern);
+  put (pattern) {
+    return map('put', pattern)
   },
 
   /**
    * The DELETE method deletes the specified resource.
    * @param {String} pattern DELETE resource URL pattern.
    */
-  del(pattern) {
-    return map('delete', pattern);
+  del (pattern) {
+    return map('delete', pattern)
   },
 
   /**
    * The CONNECT method establishes a tunnel to the server identified by the target resource.
    * @param {String} pattern CONNECT resource URL pattern.
    */
-  connect(pattern) {
-    return map('connect', pattern);
+  connect (pattern) {
+    return map('connect', pattern)
   },
 
   /**
    * The OPTIONS method is used to describe the communication options for the target resource.
    * @param {String} pattern OPTIONS resource URL pattern.
    */
-  options(pattern) {
-    return map('options', pattern);
+  options (pattern) {
+    return map('options', pattern)
   },
 
   /**
    * The TRACE method performs a message loop-back test along the path to the target resource.
    * @param {String} pattern TRACE resource URL pattern.
    */
-  trace(pattern) {
-    return map('trace', pattern);
+  trace (pattern) {
+    return map('trace', pattern)
   },
 
   /**
    * The PATCH method is used to apply partial modifications to a resource.
    * @param {String} pattern PATCH resource URL pattern.
    */
-  patch(pattern) {
-    return map('patch', pattern);
+  patch (pattern) {
+    return map('patch', pattern)
   },
 
   /**
@@ -157,50 +156,50 @@ module.exports = {
    * @param {String} pattern string pattern for glob to search view (class) handlers.
    * @param {Object} options detailed settings (incl. root prefix).
    */
-  bind(server, pattern, options = {}) {
-    const paths = glob.sync(pattern);
-    const router = options.prefix ? new Router({ prefix: options.prefix }) : new Router();
+  bind (server, pattern, options = {}) {
+    const paths = glob.sync(pattern)
+    const router = options.prefix ? new Router({ prefix: options.prefix }) : new Router()
 
     Object.values(paths).forEach((abspath) => {
       // eslint-disable-next-line
       const views = Object.values(require(abspath)).filter(meta.isClass);
       Object.values(views).forEach((Class) => {
-        const subroutes = meta.get(Class, NS.routes);
-        const instance = new Class();
+        const subroutes = meta.get(Class, NS.routes)
+        const instance = new Class()
         Object.values(subroutes).forEach((route) => {
-          const handler = instance[route.view];
-          router[route.method](route.view, route.pattern, handler);
-        });
-      });
-    });
-    server.use(router.routes()).use(router.allowedMethods());
+          const handler = instance[route.view]
+          router[route.method](route.view, route.pattern, handler)
+        })
+      })
+    })
+    server.use(router.routes()).use(router.allowedMethods())
   },
 
   /**
    * Ad-hoc Middlware support to function (FOR NOW).
    * @param {function} middleware additonal mw wrapper to function.
    */
-  use(middleware) {
+  use (middleware) {
     const decorator = (target, name, descriptor) => {
       if (target.prototype) {
         // class-level decorator.
-        const mws = meta.get(target, NS.middleware) || [];
-        mws.push(middleware);
-        meta.set(target, NS.middleware, mws);
+        const mws = meta.get(target, NS.middleware) || []
+        mws.push(middleware)
+        meta.set(target, NS.middleware, mws)
       } else {
-        const routes = meta.get(target, NS.routes) || [];
+        const routes = meta.get(target, NS.routes) || []
         Object.entries(routes).forEach(([index, route]) => {
           if (route.view === name) {
-            const mws = route.middleware || [];
-            mws.push(middleware);
+            const mws = route.middleware || []
+            mws.push(middleware)
             route.middleware = mws; // eslint-disable-line
-            routes[index] = route;
+            routes[index] = route
           }
-        });
-        meta.set(target, NS.routes, routes);
+        })
+        meta.set(target, NS.routes, routes)
       }
-      return descriptor;
-    };
-    return decorator;
-  },
-};
+      return descriptor
+    }
+    return decorator
+  }
+}

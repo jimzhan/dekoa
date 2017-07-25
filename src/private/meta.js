@@ -1,17 +1,17 @@
 
 const get = (target, key) => {
-  const descriptor = Object.getOwnPropertyDescriptor(target.prototype || target, key);
-  return descriptor && descriptor.value;
-};
+  const descriptor = Object.getOwnPropertyDescriptor(target.prototype || target, key)
+  return descriptor && descriptor.value
+}
 
 const set = (target, key, value) => {
   Object.defineProperty(target.prototype || target, key, {
     value,
     enumerable: false,
     configurable: true,
-    writable: true,
-  });
-};
+    writable: true
+  })
+}
 
 /**
  * Clone a writable Target.descriptor with given value.
@@ -23,12 +23,10 @@ const describe = (descriptor, value) => { // eslint-disable-line
     value,
     writable: descriptor.writable,
     enumerable: descriptor.enumerable,
-    configurable: descriptor.configurable,
-  };
-};
+    configurable: descriptor.configurable
+  }
+}
 
+const isClass = cls => typeof cls === 'function' && /^\s*class\s+/.test(cls.toString())
 
-const isClass = cls => typeof cls === 'function' && /^\s*class\s+/.test(cls.toString());
-
-
-module.exports = { get, set, describe, isClass };
+module.exports = { get, set, describe, isClass }

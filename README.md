@@ -1,5 +1,6 @@
 # dekoa - Decorators for Koa with :revolving_hearts:
 
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![build](https://travis-ci.org/jimzhan/dekoa.svg?branch=master)](https://travis-ci.org/jimzhan/dekoa)
 [![npm version](https://img.shields.io/npm/v/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
 [![npm downloads](https://img.shields.io/npm/dm/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)

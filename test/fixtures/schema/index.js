@@ -1,5 +1,4 @@
 
 module.exports = {
-  NewAccount: require('./NewAccount.json'),
-};
-
+  NewAccount: require('./NewAccount.json')
+}

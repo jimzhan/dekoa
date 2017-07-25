@@ -1,5 +1,5 @@
-import * as regex from 'regex';
-import { expect } from 'chai';
+import * as regex from 'regex'
+import { expect } from 'chai'
 
 describe('[regex]', () => {
   describe('[chinese]', () => {
@@ -9,8 +9,8 @@ describe('[regex]', () => {
       expect(regex.chinese.test('中文简体繁體都可以')).to.be.true;
       expect(regex.chinese.test('abc')).to.be.false;
       /* eslint-enable */
-    });
-  });
+    })
+  })
 
   describe('[email]', () => {
     it('should match email address', () => {
@@ -19,8 +19,8 @@ describe('[regex]', () => {
       expect(regex.email.test('firstname.lastname@com')).to.be.false;
       expect(regex.email.test('firstname.@example.com')).to.be.false;
       /* eslint-enable */
-    });
-  });
+    })
+  })
 
   describe('[password]', () => {
     it('should not match invalid password', () => {
@@ -30,7 +30,7 @@ describe('[regex]', () => {
       expect(regex.password.test('simplePassword')).to.be.false;
       expect(regex.password.test('less')).to.be.false;
       /* eslint-enable */
-    });
+    })
 
     it('should match valid password', () => {
       /* eslint-disable */
@@ -38,8 +38,8 @@ describe('[regex]', () => {
       expect(regex.password.test('12CD!@cb')).to.be.true;
       expect(regex.password.test('&*23CDab')).to.be.true;
       /* eslint-enable */
-    });
-  });
+    })
+  })
 
   describe('[integer]', () => {
     it('should match positive/negative integer', () => {
@@ -48,8 +48,8 @@ describe('[regex]', () => {
       expect(regex.integer.test('-2342342883')).to.be.true;
       expect(regex.integer.test('23423fdsfsd')).to.be.false;
       /* eslint-enable */
-    });
-  });
+    })
+  })
 
   describe('[number]', () => {
     it('should match positive/negative number', () => {
@@ -59,8 +59,8 @@ describe('[regex]', () => {
       expect(regex.number.test('234234.')).to.be.false;
       expect(regex.number.test('-234234.')).to.be.false;
       /* eslint-enable */
-    });
-  });
+    })
+  })
 
   describe('[url]', () => {
     it('should match valid URL (http/ftp/file)', () => {
@@ -72,8 +72,8 @@ describe('[regex]', () => {
       expect(regex.url.test('ftp://www.example.com')).to.be.true;
       expect(regex.url.test('ftp://example.it')).to.be.true;
       /* eslint-enable */
-    });
-  });
+    })
+  })
 
   describe('[IP]', () => {
     it('should match valid IP (v4) address', () => {
@@ -82,6 +82,6 @@ describe('[regex]', () => {
       expect(regex.ipv4.test('255.255.255.0')).to.be.true;
       expect(regex.ipv4.test('256.255.255.0')).to.be.false;
       /* eslint-enable */
-    });
-  });
-});
+    })
+  })
+})
