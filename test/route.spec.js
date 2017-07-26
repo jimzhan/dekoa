@@ -1,26 +1,51 @@
 import supertest from 'supertest'
 import { expect } from 'chai'
 import Status from 'http-status-codes'
-import server from './fixtures/server'
+import { server } from './fixtures/server'
 
 const request = supertest.agent(server.listen())
+const urls = {
+  accounts: '/v1/accounts'
+};
 
 describe('[route]', () => {
-  describe('/v1/accounts', () => {
+  describe(urls.accounts, () => {
     it('should find account name `test@example.com`', async () => {
-      const response = await request.get('/v1/accounts/123')
+      const response = await request.get(`${urls.accounts}/123`)
       const account = response.body
       expect(response.status).to.equal(Status.OK)
       expect(account.username).to.equal('test@example.com')
     })
 
     it('shoud create a new account', async () => {
-      const response = await request.post('/v1/accounts/')
+      const response = await request.post(urls.accounts)
       const account = response.body
       expect(response.status).to.equal(Status.CREATED)
       expect(account.username).to.equal('test@example.com')
     })
   })
+
+  describe(`[Optional Methods] ${urls.accounts}`, () => {
+    it('should HTTP::head to Service endpoint', async () => {
+      const response = await request.head(urls.accounts)
+      expect(response.status).to.equal(Status.OK)
+    })
+
+    it('should HTTP::options to Service endpoint', async () => {
+      const response = await request.options(urls.accounts)
+      expect(response.status).to.equal(Status.OK)
+    })
+
+    it('should HTTP::trace to Service endpoint', async () => {
+      const response = await request.trace(urls.accounts)
+      expect(response.status).to.equal(Status.OK)
+    })
+
+    it('should HTTP::patch to Service endpoint', async () => {
+      const response = await request.patch(urls.accounts)
+      expect(response.status).to.equal(Status.OK)
+    })
+  });
 
   describe('/v1/login', () => {
     it('should get a reset content response on login', async () => {

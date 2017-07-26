@@ -20,7 +20,7 @@ const form = (struct) => {
       const validate = ajv.compile(struct)
       const errors = validate(params) ? null : validate.errors
       if (errors) {
-        ctx.throw(Status.UNPROCESSABLE_ENTITY, errors[0])
+        ctx.throw(Status.UNPROCESSABLE_ENTITY, errors[0].message)
       }
       await descriptor.value.apply(target, [ctx, next])
     }
@@ -37,11 +37,11 @@ const form = (struct) => {
 const query = (struct) => {
   const decorator = (target, name, descriptor) => {
     const runner = async (ctx, next) => {
-      const params = ctx.request.query
+      const params = ctx.query
       const validate = ajv.compile(struct)
       const errors = validate(params) ? null : validate.errors
       if (errors) {
-        ctx.throw(Status.UNPROCESSABLE_ENTITY, errors[0])
+        ctx.throw(Status.UNPROCESSABLE_ENTITY, errors[0].message)
       }
       await descriptor.value.apply(target, [ctx, next])
     }

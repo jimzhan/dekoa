@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "limit": {
+      "type": ["string", "integer"],
+      "pattern": "^[1-9][0-9]*$",
+      "minimum": 10
+    },
+   "offset": {
+     "type": ["string", "integer"],
+     "minimum": 1
+   }
+  },
+  "required": ["offset"]
+}

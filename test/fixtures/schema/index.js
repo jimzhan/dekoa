@@ -1,4 +1,7 @@
 
 module.exports = {
-  NewAccount: require('./NewAccount.json')
+  Finder: require('./Finder.json'),
+  NewAccount: require('./NewAccount.json'),
+  UpdateAccount: require('./UpdateAccount.json'),
+  Upload: require('./Upload.json'),
 }

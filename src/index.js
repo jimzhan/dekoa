@@ -6,12 +6,11 @@ module.exports = {
   resource: route.resource,
   /* Standard HTTP Methods */
   get: route.get,
-  head: route.head,
   post: route.post,
   put: route.put,
   del: route.del,
   delete: route.del,
-  connect: route.connect,
+  head: route.head,
   options: route.options,
   trace: route.trace,
   patch: route.patch,

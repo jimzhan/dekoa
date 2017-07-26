@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "filename": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 20
+    }
+  },
+  "required": ["filename"]
+}

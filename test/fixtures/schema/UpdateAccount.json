@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "password": {
+      "type": "string",
+      "minLength": 6,
+      "maxLength": 20
+    }
+  },
+  "required": ["password"]
+}
