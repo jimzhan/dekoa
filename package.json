@@ -10,7 +10,7 @@
     "build": "babel -d dist/ src/",
     "lint": "eslint --ext=.js src test",
     "test": "cross-env DEBUG={dekoa} nyc mocha --timeout 10000 --compilers js:babel-core/register --recursive $(find . -name '*.spec.js')",
-    "cover": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --timeout 10000 --compilers js:babel-core/register --recursive $(find . -name '*.spec.js')",
+    "cover": "babel-node ./node_modules/istanbul/lib/cli cover _mocha -- --timeout 10000 --compilers js:babel-core/register --recursive $(find . -name '*.spec.js')",
     "[VERSION]": "======= Semantic Versioning =======",
     "patch": "npm version patch",
     "postpatch": "npm run push",
