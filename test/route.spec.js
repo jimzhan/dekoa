@@ -6,7 +6,7 @@ import { server } from './fixtures/server'
 const request = supertest.agent(server.listen())
 const urls = {
   accounts: '/v1/accounts'
-};
+}
 
 describe('[route]', () => {
   describe(urls.accounts, () => {
@@ -45,7 +45,7 @@ describe('[route]', () => {
       const response = await request.patch(urls.accounts)
       expect(response.status).to.equal(Status.OK)
     })
-  });
+  })
 
   describe('/v1/login', () => {
     it('should get a reset content response on login', async () => {

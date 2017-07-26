@@ -1,6 +1,6 @@
 import Status from 'http-status-codes'
 import {
-  resource, 
+  resource,
   get,
   post,
   head,
@@ -24,22 +24,22 @@ export default class Account {
   }
 
   @head('/')
-  async head(ctx) {
+  async head (ctx) {
     ctx.status = Status.OK
   }
 
   @options('/')
-  async options(ctx) {
+  async options (ctx) {
     ctx.status = Status.OK
   }
 
   @trace('/')
-  async trace(ctx) {
+  async trace (ctx) {
     ctx.status = Status.OK
   }
 
   @patch('/')
-  async patch(ctx) {
+  async patch (ctx) {
     ctx.status = Status.OK
   }
 }

@@ -13,7 +13,7 @@ function bindClassRoutes (target, prefix = '/') {
   const subroutes = meta.get(target, NS.routes) || []
   Object.values(subroutes).forEach((item) => {
     const route = Object.assign(item, {
-      pattern: prefix ? posix.join(prefix, item.pattern) : item.pattern,
+      pattern: prefix ? posix.join(prefix, item.pattern) : item.pattern
     })
     routes.push(route)
     log(`${route.method.toUpperCase()} \t ${route.pattern}`)
