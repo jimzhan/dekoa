@@ -16,11 +16,13 @@ const form = (struct) => {
         log('Request body is empty, `koa-body` missing?')
         ctx.throw(Status.INTERNAL_SERVER_ERROR)
       }
-      const params = (ctx.is('multipart') && ctx.request.body) ? ctx.request.body.fields : (ctx.request.body || {})
+      const params = ((ctx.is('multipart') && ctx.request.body) ? ctx.request.body.fields : ctx.request.body || {})
       const validate = ajv.compile(struct)
       const errors = validate(params) ? null : validate.errors
       if (errors) {
-        ctx.throw(Status.UNPROCESSABLE_ENTITY, errors[0].message)
+        const message = ajv.errorsText(validate.errors)
+        log(message)
+        ctx.throw(Status.UNPROCESSABLE_ENTITY, message)
       }
       await descriptor.value.apply(target, [ctx, next])
     }
@@ -41,7 +43,9 @@ const query = (struct) => {
       const validate = ajv.compile(struct)
       const errors = validate(params) ? null : validate.errors
       if (errors) {
-        ctx.throw(Status.UNPROCESSABLE_ENTITY, errors[0].message)
+        const message = ajv.errorsText(validate.errors)
+        log(message)
+        ctx.throw(Status.UNPROCESSABLE_ENTITY, message)
       }
       await descriptor.value.apply(target, [ctx, next])
     }
@@ -50,7 +54,7 @@ const query = (struct) => {
   return decorator
 }
 
-const validate = (struct, type = 'form') => { // eslint-disable-line
+const validate = (struct, type = 'form') => {
   return (type === 'query') ? query(struct) : form(struct)
 }
 

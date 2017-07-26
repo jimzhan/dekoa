@@ -18,7 +18,7 @@ const set = (target, key, value) => {
  * @param {Object} descriptor existing Target's descriptor to be cloned.
  * @param {Object} value Target's description value to be added.
  */
-const describe = (descriptor, value) => { // eslint-disable-line
+const describe = (descriptor, value) => {
   return {
     value,
     writable: descriptor.writable,

@@ -16,7 +16,7 @@ function bindClassRoutes (target, prefix = '/') {
       pattern: prefix ? posix.join(prefix, item.pattern) : item.pattern
     })
     routes.push(route)
-    log(`${route.method.toUpperCase()} \t ${route.pattern}`)
+    log(`${route.method.toUpperCase()}\t${route.method.length <= 4 ? '\t' : ''}${route.pattern}`)
   })
   meta.set(target, NS.routes, routes)
 }
@@ -152,7 +152,6 @@ module.exports = {
     const router = options.prefix ? new Router({ prefix: options.prefix }) : new Router()
 
     Object.values(paths).forEach((abspath) => {
-      // eslint-disable-next-line
       const views = Object.values(require(abspath)).filter(meta.isClass)
       Object.values(views).forEach((Class) => {
         const subroutes = meta.get(Class, NS.routes)
