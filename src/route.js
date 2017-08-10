@@ -1,4 +1,3 @@
-const glob = require('glob')
 const posix = require('path').posix
 const Router = require('koa-router')
 const { NS, log, meta } = require('./private')
@@ -144,14 +143,13 @@ module.exports = {
   /**
    * Search and register all available class view handerls to Koa instance.
    * @param {Object} server Koa instance.
-   * @param {String} pattern string pattern for glob to search view (class) handlers.
+   * @param {Array} files list of paths to view handlers..
    * @param {Object} options detailed settings (incl. root prefix).
    */
-  bind (server, pattern, options = {}) {
-    const paths = glob.sync(pattern)
+  bind (server, files, options = {}) {
     const router = options.prefix ? new Router({ prefix: options.prefix }) : new Router()
 
-    Object.values(paths).forEach((abspath) => {
+    Object.values(files).forEach((abspath) => {
       const views = Object.values(require(abspath)).filter(meta.isClass)
       Object.values(views).forEach((Class) => {
         const subroutes = meta.get(Class, NS.routes)

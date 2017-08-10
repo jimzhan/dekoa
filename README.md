@@ -20,67 +20,69 @@ npm install dekoa
 
 ## Decorators
 
-* route.js#bind(server, pattern, options)
+* route.js#bind(server, files, options)
 
   - assuming we have all the view controllers under `src/resources/`.
 
   ```javascript
   // src/server.js
   import Koa from 'koa'
-  import debug from 'debug';
+  import glob from 'glob'
+  import debug from 'debug'
   import { route } from 'dekoa'
 
-  const log = debug('debug');
-  const server = new Koa();
+  const log = debug('debug')
+  const server = new Koa()
 
   // all of the view controllers defined in `src/resources` will be automatically registered.
-  route.bind(server, `${__dirname}/resources/*.js`, { prefix: '/v1' });
+  const views = glob.sync(`${__dirname}/resources/*.js`)
+  route.bind(server, views, { prefix: '/v1' })
 
   const port = process.env.PORT || 9394;
   server.listen(port, () => {
-    log(`Server started at port: ${port}`);
-  });
+    log(`Server started at port: ${port}`)
+  })
   ```
 
   - sample view controllers with decorators supports.
 
   ```javascript
   // src/resources/accounts.js
-  import Status from 'http-status-codes';
-  import { resource, get, post } from 'dekoa';
+  import Status from 'http-status-codes'
+  import { resource, get, post } from 'dekoa'
 
   @resource('accounts')
   export default class Account {
     @get('/:id')
     async findById(ctx) {
-      const params = ctx.params;
-      ctx.status = Status.OK;
-      ctx.body = { id: params.id, username: 'test@example.com' };
+      const params = ctx.params
+      ctx.status = Status.OK
+      ctx.body = { id: params.id, username: 'test@example.com' }
     }
 
     @post('/')
     async create(ctx) {
-      ctx.status = Status.CREATED;
-      ctx.body = { username: 'test@example.com' };
+      ctx.status = Status.CREATED
+      ctx.body = { username: 'test@example.com' }
     }
   }
   ```
 
   ```javascript
-  import Status from 'http-status-codes';
-  import { resource, post } from 'dekoa';
+  import Status from 'http-status-codes'
+  import { resource, post } from 'dekoa'
 
   // `resource` decorator without prefix will be injected as top level URL.
   @resource
   export default class Auth {
     @post('/login')
     async login(ctx) {
-      ctx.status = Status.RESET_CONTENT;
+      ctx.status = Status.RESET_CONTENT
     }
 
     @post('/logout')
     async logout(ctx) {
-      ctx.status = Status.RESET_CONTENT;
+      ctx.status = Status.RESET_CONTENT
     }
   }
   ```
@@ -116,8 +118,8 @@ npm install dekoa
     @form(NewAccount)
     @post('/')
     async create(ctx) {
-      ctx.status = Status.CREATED;
-      ctx.body = { username: 'test@example.com' };
+      ctx.status = Status.CREATED
+      ctx.body = { username: 'test@example.com' }
     }
   }
   ```
@@ -132,8 +134,8 @@ npm install dekoa
     @query(Account)
     @post('/')
     async create(ctx) {
-      ctx.status = Status.CREATED;
-      ctx.body = { username: 'test@example.com' };
+      ctx.status = Status.CREATED
+      ctx.body = { username: 'test@example.com' }
     }
   }
   ```
@@ -147,4 +149,3 @@ npm install dekoa
 - `dekoa.regex.number` - positive/negative number.
 - `dekoa.regex.url` - http/ftp/file address.
 - `dekoa.regex.ipv4` - IP address version 4.
-
