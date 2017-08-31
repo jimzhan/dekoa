@@ -18,6 +18,64 @@
     "postminor": "npm run push",
     "push": "git push && git push --tags && npm publish"
   },
+  "babel": {
+    "presets": [
+      ["env", {
+        "targets": {
+          "node": "current"
+        }
+      }],
+      "stage-2"
+    ],
+    "plugins": [
+      "transform-class-properties",
+      "transform-decorators-legacy",
+      "transform-decorators",
+      "transform-runtime",
+      ["module-resolver", {
+        "root": ["./src"],
+        "alias": {
+          "test": "./test"
+        }
+      }]
+    ],
+    "comments": false,
+    "env": {
+      "test": {
+        "presets": ["env", "stage-2"],
+        "plugins": [ "istanbul" ]
+      }
+    }
+  },
+  "eslintConfig": {
+    "root": true,
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "env": {
+      "browser": true,
+      "mocha": true
+    },
+    "extends": "standard",
+    "plugins": [
+      "import"
+    ],
+    "settings": {
+      "import/resolver": {
+        "babel-module": {}
+      }
+    },
+    "rules": {
+      "global-require": 0,
+      "class-methods-use-this": 0,
+      "import/prefer-default-export": 0,
+      "import/no-extraneous-dependencies": 0,
+      "import/extensions": ["error", "always", {
+        "js": "never"
+      }]
+    }
+  },
   "dependencies": {
     "ajv": "^5.2.2",
     "assert": "^1.4.1",
