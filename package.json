@@ -1,6 +1,6 @@
 {
   "name": "dekoa",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "description": "Decorators for Koa",
   "main": "src/index.js",
   "repository": "https://github.com/jimzhan/dekoa",
@@ -20,11 +20,14 @@
   },
   "babel": {
     "presets": [
-      ["env", {
-        "targets": {
-          "node": "current"
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
         }
-      }],
+      ],
       "stage-2"
     ],
     "plugins": [
@@ -32,18 +35,28 @@
       "transform-decorators-legacy",
       "transform-decorators",
       "transform-runtime",
-      ["module-resolver", {
-        "root": ["./src"],
-        "alias": {
-          "test": "./test"
+      [
+        "module-resolver",
+        {
+          "root": [
+            "./src"
+          ],
+          "alias": {
+            "test": "./test"
+          }
         }
-      }]
+      ]
     ],
     "comments": false,
     "env": {
       "test": {
-        "presets": ["env", "stage-2"],
-        "plugins": [ "istanbul" ]
+        "presets": [
+          "env",
+          "stage-2"
+        ],
+        "plugins": [
+          "istanbul"
+        ]
       }
     }
   },
@@ -71,9 +84,13 @@
       "class-methods-use-this": 0,
       "import/prefer-default-export": 0,
       "import/no-extraneous-dependencies": 0,
-      "import/extensions": ["error", "always", {
-        "js": "never"
-      }]
+      "import/extensions": [
+        "error",
+        "always",
+        {
+          "js": "never"
+        }
+      ]
     }
   },
   "dependencies": {
