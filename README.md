@@ -108,15 +108,14 @@ npm install dekoa
   }
   ```
 
-* validators.js#form(<Schema>)
+* validate incoming form data
 
   ```javascript
   const NewAccount = require('./NewAccount.json')
 
   @resource('inputs')
   export default class Input {
-    @form(NewAccount)
-    @post('/')
+    @post('/', NewAccount)
     async create(ctx) {
       ctx.status = Status.CREATED
       ctx.body = { username: 'test@example.com' }
@@ -124,17 +123,16 @@ npm install dekoa
   }
   ```
 
-* validators.js#query(<Schema>)
+* validate incoming http query (`GET`|`HEAD`|`DELETE` ONLY)
 
   ```javascript
   const Account = require('./Account.json')
 
   @resource('inputs')
   export default class Input {
-    @query(Account)
-    @post('/')
-    async create(ctx) {
-      ctx.status = Status.CREATED
+    @get('/', Account)
+    async find(ctx) {
+      ctx.status = Status.OK 
       ctx.body = { username: 'test@example.com' }
     }
   }
