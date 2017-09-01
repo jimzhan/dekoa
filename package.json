@@ -7,6 +7,7 @@
   "author": "Jim Zhan <jim.zhan@me.com>",
   "license": "Apache-2.0",
   "scripts": {
+    "precommit": "npm test",
     "build": "babel -d dist/ src/",
     "lint": "eslint --ext=.js src test",
     "test": "cross-env DEBUG={dekoa} nyc mocha --timeout 10000 --compilers js:babel-core/register --recursive $(find . -name '*.spec.js')",
@@ -90,7 +91,8 @@
         {
           "js": "never"
         }
-      ]
+      ],
+      "space-before-function-paren": 0
     }
   },
   "dependencies": {

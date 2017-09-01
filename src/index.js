@@ -1,5 +1,4 @@
 const route = require('./route')
-const schema = require('./schema')
 
 module.exports = {
   bind: route.bind,
@@ -13,9 +12,5 @@ module.exports = {
   head: route.head,
   options: route.options,
   trace: route.trace,
-  patch: route.patch,
-  /* JSON Schema based validators */
-  form: schema.form,
-  query: schema.query,
-  validate: schema.validate
+  patch: route.patch
 }
