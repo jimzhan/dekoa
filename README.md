@@ -10,7 +10,7 @@
 
 Handy decorators dedicated for Koa, batteris included:
 * Class based routes supports (full HTTP method supports, [RFC7231](https://tools.ietf.org/html/rfc7231#section-4)).
-* [JSON Schema](http://json-schema.org/) based validators (`form`, `query`, `path`).
+* [JSON Schema](http://json-schema.org/) based validators (via [koa-body](https://github.com/dlau/koa-body)).
 
 ## Installation
 

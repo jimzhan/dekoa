@@ -32,7 +32,7 @@ const bindClassRoutes = (target, prefix = '/') => {
  *    middleware: list of middleware.
  *  }
  * --------------------------------------------------------------------------------
- * Validate incoming HTTP 
+ * Validate incoming HTTP
  *  - form data .
  *  - query parameter (if ctx.method is GET|HEAD|DELETE).
  * using predefine JSON schema.
@@ -159,9 +159,9 @@ const trace = (pattern, schema = null) => map('trace', pattern, schema)
 const patch = (pattern, schema = null) => map('patch', pattern, schema)
 
 /**
- * Search and register all available class view handerls to Koa instance.
+ * Search and register all available class view handlers to Koa instance.
  * @param {Object} server Koa instance.
- * @param {Array} files list of paths to view handlers..
+ * @param {Array} files list of paths to view handlers.
  * @param {Object} options detailed settings (incl. root prefix).
  */
 const bind = (server, files, options = {}) => {
