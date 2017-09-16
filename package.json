@@ -10,8 +10,8 @@
     "precommit": "npm test",
     "build": "babel -d dist/ src/",
     "lint": "eslint --ext=.js src test",
-    "test": "cross-env DEBUG={dekoa} nyc mocha --timeout 10000 --compilers js:babel-core/register --recursive $(find . -name '*.spec.js')",
-    "cover": "babel-node ./node_modules/istanbul/lib/cli cover _mocha -- --timeout 10000 --compilers js:babel-core/register --recursive $(find . -name '*.spec.js')",
+    "test": "BABEL_ENV=testing jest --forceExit --coverage",
+    "test:watch": "npm test -- --watch --watchExtensions js,jsx",
     "[VERSION]": "======= Semantic Versioning =======",
     "patch": "npm version patch",
     "postpatch": "npm run push",
@@ -29,6 +29,7 @@
           }
         }
       ],
+      "jest",
       "stage-2"
     ],
     "plugins": [
@@ -63,15 +64,14 @@
   },
   "eslintConfig": {
     "root": true,
+    "extends": "standard",
     "parser": "babel-eslint",
     "parserOptions": {
       "sourceType": "module"
     },
     "env": {
-      "browser": true,
-      "mocha": true
+      "jest": true
     },
-    "extends": "standard",
     "plugins": [
       "import"
     ],
@@ -81,19 +81,28 @@
       }
     },
     "rules": {
-      "global-require": 0,
       "class-methods-use-this": 0,
       "import/prefer-default-export": 0,
       "import/no-extraneous-dependencies": 0,
-      "import/extensions": [
-        "error",
-        "always",
+      "import/no-unresolved": [
+        2,
         {
-          "js": "never"
+          "commonjs": true
         }
       ],
       "space-before-function-paren": 0
     }
+  },
+  "jest": {
+    "rootDir": ".",
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    },
+    "globals": {
+      "__DEV__": true
+    },
+    "setupTestFrameworkScriptFile": "./test/bootstrap.js",
+    "testRegex": "./test/.*.spec.jsx?$"
   },
   "dependencies": {
     "ajv": "^5.2.2",
@@ -108,14 +117,15 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^21.0.2",
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-jest": "^21.0.2",
     "babel-preset-stage-2": "^6.24.1",
-    "chai": "^4.1.0",
     "coveralls": "^2.13.1",
     "cross-env": "^5.0.5",
     "debug": "^2.6.8",
@@ -128,9 +138,9 @@
     "eslint-plugin-standard": "^3.0.1",
     "husky": "^0.14.3",
     "istanbul": "^0.4.5",
+    "jest": "^21.1.0",
     "koa": "^2.3.0",
     "koa-body": "^2.3.0",
-    "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
     "nyc": "^11.0.3",
     "supertest": "^3.0.0"

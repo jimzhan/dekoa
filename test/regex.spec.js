@@ -1,87 +1,56 @@
 import * as regex from 'regex'
-import { expect } from 'chai'
 
 describe('[regex]', () => {
-  describe('[chinese]', () => {
-    it('should match chinese characters', () => {
-      /* eslint-disable */
-      expect(regex.chinese.test('中文')).to.be.true
-      expect(regex.chinese.test('中文简体繁體都可以')).to.be.true
-      expect(regex.chinese.test('abc')).to.be.false
-      /* eslint-enable */
-    })
+  it('should match chinese characters', () => {
+    expect(regex.chinese.test('中文')).toBeTruthy()
+    expect(regex.chinese.test('中文简体繁體都可以')).toBeTruthy()
+    expect(regex.chinese.test('abc')).toBeFalsy()
   })
 
-  describe('[email]', () => {
-    it('should match email address', () => {
-      /* eslint-disable */
-      expect(regex.email.test('firstname.lastname@example.com')).to.be.true
-      expect(regex.email.test('firstname.lastname@com')).to.be.false
-      expect(regex.email.test('firstname.@example.com')).to.be.false
-      /* eslint-enable */
-    })
+  it('should match email address', () => {
+    expect(regex.email.test('firstname.lastname@example.com')).toBeTruthy()
+    expect(regex.email.test('firstname.lastname@com')).toBeFalsy()
+    expect(regex.email.test('firstname.@example.com')).toBeFalsy()
   })
 
-  describe('[password]', () => {
-    it('should not match invalid password', () => {
-      /* eslint-disable */
-      expect(regex.password.test('21342423423')).to.be.false
-      expect(regex.password.test('abCD@#$#@$@')).to.be.false
-      expect(regex.password.test('simplePassword')).to.be.false
-      expect(regex.password.test('less')).to.be.false
-      /* eslint-enable */
-    })
-
-    it('should match valid password', () => {
-      /* eslint-disable */
-      expect(regex.password.test('abCD23*^')).to.be.true
-      expect(regex.password.test('12CD!@cb')).to.be.true
-      expect(regex.password.test('&*23CDab')).to.be.true
-      /* eslint-enable */
-    })
+  it('should not match invalid password', () => {
+    expect(regex.password.test('21342423423')).toBeFalsy()
+    expect(regex.password.test('abCD@#$#@$@')).toBeFalsy()
+    expect(regex.password.test('simplePassword')).toBeFalsy()
+    expect(regex.password.test('less')).toBeFalsy()
   })
 
-  describe('[integer]', () => {
-    it('should match positive/negative integer', () => {
-      /* eslint-disable */
-      expect(regex.integer.test('23423423423')).to.be.true
-      expect(regex.integer.test('-2342342883')).to.be.true
-      expect(regex.integer.test('23423fdsfsd')).to.be.false
-      /* eslint-enable */
-    })
+  it('should match valid password', () => {
+    expect(regex.password.test('abCD23*^')).toBeTruthy()
+    expect(regex.password.test('12CD!@cb')).toBeTruthy()
+    expect(regex.password.test('&*23CDab')).toBeTruthy()
   })
 
-  describe('[number]', () => {
-    it('should match positive/negative number', () => {
-      /* eslint-disable */
-      expect(regex.number.test('234234.23423')).to.be.true
-      expect(regex.number.test('-234234.23423')).to.be.true
-      expect(regex.number.test('234234.')).to.be.false
-      expect(regex.number.test('-234234.')).to.be.false
-      /* eslint-enable */
-    })
+  it('should match positive/negative integer', () => {
+    expect(regex.integer.test('23423423423')).toBeTruthy()
+    expect(regex.integer.test('-2342342883')).toBeTruthy()
+    expect(regex.integer.test('23423fdsfsd')).toBeFalsy()
   })
 
-  describe('[url]', () => {
-    it('should match valid URL (http/ftp/file)', () => {
-      /* eslint-disable */
-      expect(regex.url.test('http://www.example.com')).to.be.true
-      expect(regex.url.test('https://www.example.com')).to.be.true
-      expect(regex.url.test('https://example.com')).to.be.true
-      expect(regex.url.test('example.it')).to.be.true
-      expect(regex.url.test('ftp://www.example.com')).to.be.true
-      expect(regex.url.test('ftp://example.it')).to.be.true
-      /* eslint-enable */
-    })
+  it('should match positive/negative number', () => {
+    expect(regex.number.test('234234.23423')).toBeTruthy()
+    expect(regex.number.test('-234234.23423')).toBeTruthy()
+    expect(regex.number.test('234234.')).toBeFalsy()
+    expect(regex.number.test('-234234.')).toBeFalsy()
   })
 
-  describe('[IP]', () => {
-    it('should match valid IP (v4) address', () => {
-      /* eslint-disable */
-      expect(regex.ipv4.test('8.8.8.8')).to.be.true
-      expect(regex.ipv4.test('255.255.255.0')).to.be.true
-      expect(regex.ipv4.test('256.255.255.0')).to.be.false
-      /* eslint-enable */
-    })
+  it('should match valid URL (http/ftp/file)', () => {
+    expect(regex.url.test('http://www.example.com')).toBeTruthy()
+    expect(regex.url.test('https://www.example.com')).toBeTruthy()
+    expect(regex.url.test('https://example.com')).toBeTruthy()
+    expect(regex.url.test('example.it')).toBeTruthy()
+    expect(regex.url.test('ftp://www.example.com')).toBeTruthy()
+    expect(regex.url.test('ftp://example.it')).toBeTruthy()
+  })
+
+  it('should match valid IP (v4) address', () => {
+    expect(regex.ipv4.test('8.8.8.8')).toBeTruthy()
+    expect(regex.ipv4.test('255.255.255.0')).toBeTruthy()
+    expect(regex.ipv4.test('256.255.255.0')).toBeFalsy()
   })
 })

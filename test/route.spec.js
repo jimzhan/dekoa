@@ -1,80 +1,77 @@
-import supertest from 'supertest'
-import { expect } from 'chai'
 import Status from 'http-status-codes'
-import { server } from './fixtures/server'
+import * as helpers from 'test/helpers'
 
-const request = supertest.agent(server.listen())
 const urls = {
-  accounts: '/v1/accounts'
+  accounts: '/accounts'
 }
 
 describe('[route]', () => {
   describe(urls.accounts, () => {
     it('should find account name `test@example.com`', async () => {
-      const response = await request.get(`${urls.accounts}/123`)
+      const response = await helpers.get(`${urls.accounts}/123`).send()
       const account = response.body
-      expect(response.status).to.equal(Status.OK)
-      expect(account.username).to.equal('test@example.com')
+      expect(response.status).toEqual(Status.OK)
+      expect(account.username).toEqual('test@example.com')
     })
 
     it('shoud create a new account', async () => {
-      const response = await request.post(urls.accounts)
+      const response = await helpers.post(urls.accounts).send()
       const account = response.body
-      expect(response.status).to.equal(Status.CREATED)
-      expect(account.username).to.equal('test@example.com')
+      expect(response.status).toEqual(Status.CREATED)
+      expect(account.username).toEqual('test@example.com')
     })
   })
 
   describe(`[Optional Methods] ${urls.accounts}`, () => {
     it('should HTTP::head to Service endpoint', async () => {
-      const response = await request.head(urls.accounts)
-      expect(response.status).to.equal(Status.OK)
+      const response = await helpers.head(urls.accounts).send()
+      expect(response.status).toEqual(Status.OK)
     })
 
     it('should HTTP::options to Service endpoint', async () => {
-      const response = await request.options(urls.accounts)
-      expect(response.status).to.equal(Status.OK)
+      const response = await helpers.options(urls.accounts).send()
+      expect(response.status).toEqual(Status.OK)
     })
 
     it('should HTTP::trace to Service endpoint', async () => {
-      const response = await request.trace(urls.accounts)
-      expect(response.status).to.equal(Status.OK)
+      const response = await helpers.trace(urls.accounts).send()
+      expect(response.status).toEqual(Status.OK)
     })
 
     it('should HTTP::patch to Service endpoint', async () => {
-      const response = await request.patch(urls.accounts)
-      expect(response.status).to.equal(Status.OK)
+      const response = await helpers.patch(urls.accounts).send()
+      expect(response.status).toEqual(Status.OK)
     })
   })
 
   describe('/v1/login', () => {
     it('should get a reset content response on login', async () => {
-      const response = await request.post('/v1/login')
-      expect(response.status).to.equal(Status.RESET_CONTENT)
+      const response = await helpers.post('/login').send()
+      expect(response.status).toEqual(Status.RESET_CONTENT)
     })
   })
 
   describe('/v1/logout', () => {
     it('should get a reset content response on logout', async () => {
-      const response = await request.post('/v1/logout')
-      expect(response.status).to.equal(Status.RESET_CONTENT)
+      const response = await helpers.post('/logout').send()
+      expect(response.status).toEqual(Status.RESET_CONTENT)
     })
   })
 
   describe('/v1/orders', () => {
     it('should find the order with given id', async () => {
-      const response = await request.get('/v1/orders/123')
+      const response = await helpers.get('/orders/123').send()
       const order = response.body
-      expect(response.status).to.equal(Status.OK)
-      expect(order.id).to.equal('123')
+      expect(response.status).toEqual(Status.OK)
+      expect(order.id).toEqual('123')
     })
 
     it('should create a new order', async () => {
-      const response = await request.post('/v1/orders/').send({ id: 123, name: 'new' })
+      const response = await helpers.post('/orders/').send({ id: 123, name: 'new' })
       const order = response.body
-      expect(response.status).to.equal(Status.CREATED)
-      expect(order.id).to.equal(123)
-      expect(order.name).to.equal('new')
+      expect(response.status).toEqual(Status.CREATED)
+      expect(order.id).toEqual(123)
+      expect(order.name).toEqual('new')
     })
   })
 })

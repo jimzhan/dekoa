@@ -1,38 +1,33 @@
-import supertest from 'supertest'
-import { expect } from 'chai'
 import Status from 'http-status-codes'
-import { server } from './fixtures/server'
+import * as helpers from 'test/helpers'
 
-const request = supertest.agent(server.listen())
-const url = '/v1/roles'
+const url = '/roles'
 
 describe('[roles]', () => {
-  describe(`POST ${url}`, () => {
-    it('should receive a 422 response on empty request', async () => {
-      const response = await request.post(url).send()
-      expect(response.status).to.equal(Status.UNPROCESSABLE_ENTITY)
-    })
+  it('should receive a 422 response on empty request', async () => {
+    const response = await helpers.post(url).send()
+    expect(response.status).toEqual(Status.UNPROCESSABLE_ENTITY)
+  })
 
-    it('should receive a 422 response on invalid request', async () => {
-      const response = await request.post(url).send({ name: 'test@example.com' })
-      expect(response.status).to.equal(Status.UNPROCESSABLE_ENTITY)
-    })
+  it('should receive a 422 response on invalid request', async () => {
+    const response = await helpers.post(url).send({ name: 'test@example.com' })
+    expect(response.status).toEqual(Status.UNPROCESSABLE_ENTITY)
+  })
 
-    it('should receive a 201 response on valid request', async () => {
-      const role = {
-        name: 'admin',
-        note: 'Administrator',
-        perms: {
-          action: 'create',
-          resource: 'docs'
-        }
+  it('should receive a 201 response on valid request', async () => {
+    const role = {
+      name: 'admin',
+      note: 'Administrator',
+      perms: {
+        action: 'create',
+        resource: 'docs'
       }
-      const response = await request.post(url).send(role)
-      expect(response.status).to.equal(Status.CREATED)
-      expect(response.body.name).to.equal('admin')
-      expect(response.body.note).to.equal('Administrator')
-      expect(response.body.perms.action).to.equal('create')
-      expect(response.body.perms.resource).to.equal('docs')
-    })
+    }
+    const response = await helpers.post(url).send(role)
+    expect(response.status).toEqual(Status.CREATED)
+    expect(response.body.name).toEqual('admin')
+    expect(response.body.note).toEqual('Administrator')
+    expect(response.body.perms.action).toEqual('create')
+    expect(response.body.perms.resource).toEqual('docs')
   })
 })
