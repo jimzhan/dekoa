@@ -10,8 +10,9 @@
     "precommit": "npm test",
     "build": "babel -d dist/ src/",
     "lint": "eslint --ext=.js src test",
-    "test": "BABEL_ENV=testing jest --forceExit --coverage",
+    "test": "BABEL_ENV=testing jest --no-cache --forceExit --coverage",
     "test:watch": "npm test -- --watch --watchExtensions js,jsx",
+    "cover": "jest --forceExit --coverage && cat ./coverage/lcov.txt | ./node_modules/coveralls/bin/coveralls.js",
     "[VERSION]": "======= Semantic Versioning =======",
     "patch": "npm version patch",
     "postpatch": "npm run push",
@@ -95,14 +96,18 @@
   },
   "jest": {
     "rootDir": ".",
-    "transform": {
-      ".*": "<rootDir>/node_modules/babel-jest"
-    },
     "globals": {
       "__DEV__": true
     },
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    },
     "setupTestFrameworkScriptFile": "./test/bootstrap.js",
-    "testRegex": "./test/.*.spec.jsx?$"
+    "testRegex": "./test/.*.spec.jsx?$",
+    "collectCoverageFrom": [
+      "src/*.js",
+      "!src/index.js"
+    ]
   },
   "dependencies": {
     "ajv": "^5.2.2",
