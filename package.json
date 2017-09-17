@@ -133,7 +133,6 @@
     "babel-preset-jest": "^21.0.2",
     "babel-preset-stage-2": "^6.24.1",
     "codecov": "^2.3.0",
-    "coveralls": "^2.13.1",
     "cross-env": "^5.0.5",
     "debug": "^2.6.8",
     "eslint": "^4.2.0",

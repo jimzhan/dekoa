@@ -2,7 +2,6 @@
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![build](https://travis-ci.org/jimzhan/dekoa.svg?branch=master)](https://travis-ci.org/jimzhan/dekoa)
-[![Coverage Status](https://coveralls.io/repos/github/jimzhan/dekoa/badge.svg?branch=master)](https://coveralls.io/github/jimzhan/dekoa?branch=master)
 [![Coverage Status](https://img.shields.io/codecov/c/github/jimzhan/dekoa/master.svg?style=flat-square)](https://img.shields.io/codecov/c/github/jimzhan/dekoa/master.svg?style=flat-square)
 [![npm version](https://img.shields.io/npm/v/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
 [![npm downloads](https://img.shields.io/npm/dm/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
