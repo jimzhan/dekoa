@@ -14,7 +14,7 @@
     "test:watch": "npm test -- --watch --watchExtensions js,jsx",
     "precodecov": "npm run test",
     "codecov": "codecov",
-    "postcodecov": "rmrif coverage",
+    "postcodecov": "rimraf coverage",
     "[VERSION]": "======= Semantic Versioning =======",
     "patch": "npm version patch",
     "postpatch": "npm run push",
