@@ -6,6 +6,17 @@
   "repository": "https://github.com/jimzhan/dekoa",
   "author": "Jim Zhan <jim.zhan@me.com>",
   "license": "Apache-2.0",
+  "keywords": [
+    "es6",
+    "es7",
+    "decorator",
+    "decorators",
+    "koa",
+    "koa2",
+    "koajs",
+    "route",
+    "router"
+  ],
   "scripts": {
     "precommit": "npm test",
     "build": "babel -d dist/ src/",
