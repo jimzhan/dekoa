@@ -14,6 +14,7 @@
     "koa",
     "koa2",
     "koajs",
+    "koa-router",
     "route",
     "router"
   ],
