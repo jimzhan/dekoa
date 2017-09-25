@@ -9,14 +9,26 @@
   "keywords": [
     "es6",
     "es7",
+    "data",
     "decorator",
     "decorators",
     "koa",
     "koa2",
     "koajs",
+    "koa-body",
     "koa-router",
+    "json",
+    "jsonschema",
+    "json-schema",
+    "json-schema-validator",
+    "json-schema-validation",
     "route",
-    "router"
+    "router",
+    "routing",
+    "schema",
+    "standard",
+    "validator",
+    "validation"
   ],
   "scripts": {
     "precommit": "npm test",
