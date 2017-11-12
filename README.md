@@ -8,9 +8,10 @@
 [![dependencies](https://david-dm.org/jimzhan/dekoa.svg)](https://david-dm.org/jimzhan/dekoa.svg)
 
 
-Handy decorators dedicated for Koa, batteris included:
+Handy decorators & middlewares dedicated for Koa, batteris included:
 * Class based routes supports (full HTTP method supports, [RFC7231](https://tools.ietf.org/html/rfc7231#section-4)).
 * [JSON Schema](http://json-schema.org/) based validators (via [koa-body](https://github.com/dlau/koa-body)).
+* Common middleware helpers.
 
 ## Installation
 
