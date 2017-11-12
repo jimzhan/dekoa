@@ -1,3 +1,3 @@
 module.exports = {
-  XSRF: require('./xsrf').default
+  XSRF: require('./xsrf')
 }

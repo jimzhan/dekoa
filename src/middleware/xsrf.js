@@ -9,7 +9,7 @@ const xsrfCookieName = 'xsrftoken'
 const xsrfHeaderName = 'X-XSRF-Token'
 const TOKEN_EXPIRES_IN = 365 * 24 * 3600 * 1000 // Granted token life time on browser cookie (1 year).
 
-export default function XSRF (secret, options = {}) {
+const XSRF = (secret, options = {}) => {
   assert(
     secret,
     'XSRF secret is missing'
@@ -65,3 +65,5 @@ export default function XSRF (secret, options = {}) {
   }
   return middleware
 }
+
+module.exports = XSRF
