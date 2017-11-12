@@ -138,6 +138,27 @@ npm install dekoa
   }
   ```
 
+## Middlewares
+
+* XSRF (aka. CSRF) - built on top of [CSRF](https://www.npmjs.com/package/csrf), set for SPA without `session` dependency via cookie and header. Available options:
+  - `xsrfCookieName` - cookie name for saving XSRF token (default `xsrftoken`).
+  - `xsrfHeaderName` - http header name for responsing XSRF token, value is same as cookie's one (default `X-XSRF-Token`).
+  - `invalidTokenMessage` - error message responded for client (default `Invalid XSRF Token`).
+  - `invalidTokenStatusCode` - error http status code responded for client (default `403`).
+  - `excludedMethods` - methods bypass for XSRF token checking (default `[ 'GET', 'HEAD', 'OPTIONS' ]`).
+
+```javascript
+import Koa from 'koa'
+import { XSRF } from 'dekoa/middleware'
+
+const server = new Koa()
+server.use(XSRF('<my-app-secret>'))
+server.listen(port, () => {
+  log(`Server started at port: ${port}`)
+})
+```
+
+
 ## Regular Expression Helpers
 
 - `dekoa.regex.chinese` - chinese characters.

@@ -1,5 +1,5 @@
 import Status from 'http-status-codes'
-import { resource, post } from 'route'
+import { resource, post, del } from 'route'
 
 @resource
 export default class Account {
@@ -11,5 +11,10 @@ export default class Account {
   @post('/logout')
   async logout (ctx) {
     ctx.status = Status.RESET_CONTENT
+  }
+
+  @del('/xsrf')
+  async remove (ctx) {
+    ctx.status = Status.NO_CONTENT
   }
 }

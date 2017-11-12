@@ -4,6 +4,10 @@ import * as helpers from 'test/helpers'
 const url = '/roles'
 
 describe('[roles]', () => {
+  beforeEach(async () => {
+    await helpers.get('/home').send()
+  })
+
   it('should receive a 422 response on empty request', async () => {
     const response = await helpers.post(url).send()
     expect(response.status).toEqual(Status.UNPROCESSABLE_ENTITY)
