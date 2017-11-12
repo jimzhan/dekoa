@@ -150,10 +150,10 @@ npm install dekoa
 
 ```javascript
 import Koa from 'koa'
-import { XSRF } from 'dekoa/middleware'
+import { middleware } from 'dekoa'
 
 const server = new Koa()
-server.use(XSRF('<my-app-secret>'))
+server.use(middleware.XSRF('<my-app-secret>'))
 server.listen(port, () => {
   log(`Server started at port: ${port}`)
 })

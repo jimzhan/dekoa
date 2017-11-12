@@ -3,6 +3,7 @@ const route = require('./route')
 module.exports = {
   bind: route.bind,
   resource: route.resource,
+  middleware: require('./middleware'),
   /* Standard HTTP Methods */
   get: route.get,
   post: route.post,
