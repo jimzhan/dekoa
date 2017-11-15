@@ -1,4 +1,5 @@
 import supertest from 'supertest'
+import parser from 'set-cookie-parser'
 import App from 'test/fixtures'
 
 const app = new App()
@@ -16,3 +17,11 @@ export const del = (path) => Q('delete', path)
 export const trace = (path) => Q('trace', path)
 export const head = (path) => Q('head', path)
 export const options = (path) => Q('options', path)
+
+export const fetchXsrfToken = async () => {
+  const response = await get('/home').send()
+  const cookie = (parser(response) || []).filter(item => item.name === 'xsrftoken')
+  return cookie.length === 1 ? cookie[0].value : null
+}
+
+export const XSRF = 'X-XSRF-Token'

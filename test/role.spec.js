@@ -2,19 +2,20 @@ import Status from 'http-status-codes'
 import * as helpers from 'test/helpers'
 
 const url = '/roles'
+let token
 
 describe('[roles]', () => {
   beforeEach(async () => {
-    await helpers.get('/home').send()
+    token = await helpers.fetchXsrfToken()
   })
 
   it('should receive a 422 response on empty request', async () => {
-    const response = await helpers.post(url).send()
+    const response = await helpers.post(url).set(helpers.XSRF, token).send()
     expect(response.status).toEqual(Status.UNPROCESSABLE_ENTITY)
   })
 
   it('should receive a 422 response on invalid request', async () => {
-    const response = await helpers.post(url).send({ name: 'test@example.com' })
+    const response = await helpers.post(url).set(helpers.XSRF, token).send({ name: 'test@example.com' })
     expect(response.status).toEqual(Status.UNPROCESSABLE_ENTITY)
   })
 
@@ -27,7 +28,7 @@ describe('[roles]', () => {
         resource: 'docs'
       }
     }
-    const response = await helpers.post(url).send(role)
+    const response = await helpers.post(url).set(helpers.XSRF, token).send(role)
     expect(response.status).toEqual(Status.CREATED)
     expect(response.body.name).toEqual('admin')
     expect(response.body.note).toEqual('Administrator')

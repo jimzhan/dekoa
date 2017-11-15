@@ -147,6 +147,7 @@ npm install dekoa
   - `invalidTokenMessage` - error message responded for client (default `Invalid XSRF Token`).
   - `invalidTokenStatusCode` - error http status code responded for client (default `403`).
   - `excludedMethods` - methods bypass for XSRF token checking (default `[ 'GET', 'HEAD', 'OPTIONS' ]`).
+  - `renewPostWrite` - whether XSRF token should be renew after each write (default: `false`).
 
 ```javascript
 import Koa from 'koa'
