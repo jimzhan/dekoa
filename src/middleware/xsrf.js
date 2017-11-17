@@ -7,7 +7,6 @@ const log = debug('{dekoa}')
 
 const xsrfCookieName = 'xsrftoken'
 const xsrfHeaderName = 'X-XSRF-Token'
-const TOKEN_EXPIRES_IN = 365 * 24 * 3600 * 1000 // Granted token life time on browser cookie (1 year).
 
 const XSRF = (secret, options = {}) => {
   assert(secret, 'XSRF secret is missing')
@@ -33,8 +32,7 @@ const XSRF = (secret, options = {}) => {
     ctx.ensureTokenPresent = () => {
       const token = xsrf.create(secret)
       ctx.cookies.set(settings.xsrfCookieName, token, {
-        httpOnly: false,
-        maxAge: TOKEN_EXPIRES_IN
+        httpOnly: false
       })
     }
 
