@@ -30,14 +30,14 @@ npm install dekoa
   import Koa from 'koa'
   import glob from 'glob'
   import debug from 'debug'
-  import { route } from 'dekoa'
+  import * as dekoa from 'dekoa'
 
   const log = debug('debug')
   const server = new Koa()
 
   // all of the view controllers defined in `src/resources` will be automatically registered.
   const views = glob.sync(`${__dirname}/resources/*.js`)
-  route.bind(server, views, { prefix: '/v1' })
+  dekoa.bind(server, views, { prefix: '/v1' })
 
   const port = process.env.PORT || 9394;
   server.listen(port, () => {
