@@ -4,7 +4,7 @@
 [![build](https://travis-ci.org/jimzhan/dekoa.svg?branch=master)](https://travis-ci.org/jimzhan/dekoa)
 [![codecov](https://codecov.io/gh/jimzhan/dekoa/branch/master/graph/badge.svg)](https://codecov.io/gh/jimzhan/dekoa)
 [![npm version](https://img.shields.io/npm/v/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
-[![npm downloads](https://img.shields.io/npm/dm/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
+[![npm downloads](https://img.shields.io/npm/dt/dekoa.svg?style=flat-square)](https://www.npmjs.com/package/dekoa)
 [![dependencies](https://david-dm.org/jimzhan/dekoa.svg)](https://david-dm.org/jimzhan/dekoa.svg)
 
 

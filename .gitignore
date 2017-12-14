@@ -57,3 +57,4 @@ typings/
 # dotenv environment variables file
 .env
 play.js
+.DS_Store
