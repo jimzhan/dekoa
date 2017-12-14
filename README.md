@@ -6,6 +6,7 @@
 [![npm version](https://img.shields.io/npm/v/dekoa.svg)](https://www.npmjs.com/package/dekoa)
 [![npm downloads](https://img.shields.io/npm/dt/dekoa.svg)](https://www.npmjs.com/package/dekoa)
 [![dependencies](https://david-dm.org/jimzhan/dekoa.svg)](https://david-dm.org/jimzhan/dekoa.svg)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 
 Handy decorators & middlewares dedicated for Koa, batteris included:
