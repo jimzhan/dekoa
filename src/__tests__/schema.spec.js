@@ -1,7 +1,8 @@
 import Status from 'http-status-codes'
-import * as helpers from 'test/helpers'
+import * as helpers from './helpers'
 
 const url = '/schema/'
+const doc = `${__dirname}/../../LICENSE`
 let token
 
 describe('[schema]', () => {
@@ -16,7 +17,8 @@ describe('[schema]', () => {
     })
 
     it('should receive a 200 response on valid request', async () => {
-      const response = await helpers.get(url)
+      const response = await helpers
+        .get(url)
         .query({ offset: 100, limit: 100 })
         .set('Content-Type', 'application/json')
         .send()
@@ -27,18 +29,20 @@ describe('[schema]', () => {
   const upload = `${url}upload`
   describe(`[POST][multipart] ${upload}`, () => {
     it('should receive a 422 response on empty upload', async () => {
-      const response = await helpers.post(upload)
+      const response = await helpers
+        .post(upload)
         .set(helpers.XSRF, token)
         .field('filename', 'a')
-        .attach('LICENSE', `${__dirname}/../LICENSE`)
+        .attach('LICENSE', doc)
       expect(response.status).toEqual(Status.UNPROCESSABLE_ENTITY)
     })
 
     it('should receive a 200 response on valid upload', async () => {
-      const response = await helpers.post(upload)
+      const response = await helpers
+        .post(upload)
         .set(helpers.XSRF, token)
         .field('filename', 'abc.txt')
-        .attach('LICENSE', `${__dirname}/../LICENSE`)
+        .attach('LICENSE', doc)
       expect(response.status).toEqual(Status.CREATED)
     })
   })
@@ -60,12 +64,18 @@ describe('[schema]', () => {
 
   describe(`PUT ${url}`, () => {
     it('should receive a 422 response on empty request', async () => {
-      const response = await helpers.put(`${url}123`).set(helpers.XSRF, token).send()
+      const response = await helpers
+        .put(`${url}123`)
+        .set(helpers.XSRF, token)
+        .send()
       expect(response.status).toEqual(Status.UNPROCESSABLE_ENTITY)
     })
 
     it('should receive a 200 response on valid request', async () => {
-      const response = await helpers.put(`${url}123`).set(helpers.XSRF, token).send({ password: 'fdsfdsfds' })
+      const response = await helpers
+        .put(`${url}123`)
+        .set(helpers.XSRF, token)
+        .send({ password: 'fdsfdsfds' })
       expect(response.status).toEqual(Status.OK)
       expect(response.body.username).toEqual('test@example.com')
     })

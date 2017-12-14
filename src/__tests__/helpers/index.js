@@ -1,6 +1,6 @@
 import supertest from 'supertest'
 import parser from 'set-cookie-parser'
-import App from 'test/fixtures'
+import App from '../fixtures'
 
 const app = new App()
 // ----------------------------------------------------------------------

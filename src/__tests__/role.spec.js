@@ -1,5 +1,5 @@
 import Status from 'http-status-codes'
-import * as helpers from 'test/helpers'
+import * as helpers from './helpers'
 
 const url = '/roles'
 let token

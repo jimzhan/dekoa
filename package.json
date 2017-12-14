@@ -31,12 +31,10 @@
     "validation"
   ],
   "scripts": {
-    "precommit": "lint-staged",
-    "commit": "git-cz",
-    "commitmsg": "commitlint -e $GIT_PARAMS",
-    "build": "babel -d src build",
+    "precommit": "npm test",
+    "build": "babel -d dist/ src/",
     "lint": "eslint --ext=.js src test",
-    "test": "cross-env DEBUG={dekoa} BABEL_ENV=test jest --no-cache --forceExit --coverage",
+    "test": "cross-env DEBUG={dekoa} BABEL_ENV=testing jest --no-cache --forceExit --coverage",
     "test:watch": "npm test -- --watch --watchExtensions js,jsx",
     "precodecov": "npm run test",
     "codecov": "codecov",
@@ -48,15 +46,23 @@
     "postminor": "npm run push",
     "push": "git push && git push --tags && npm publish"
   },
-  "<Settings>": "------------------------------ Foundation Settings ------------------------------",
   "babel": {
     "presets": [
-      "env",
-      "jest"
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      "jest",
+      "stage-2"
     ],
     "plugins": [
-      "transform-decorators-legacy",
       "transform-class-properties",
+      "transform-decorators-legacy",
+      "transform-decorators",
       "transform-runtime",
       [
         "module-resolver",
@@ -65,20 +71,22 @@
             "./src"
           ],
           "alias": {
-            "tests": "./tests"
+            "test": "./test"
           }
         }
       ]
-    ]
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
+    ],
+    "comments": false,
+    "env": {
+      "test": {
+        "presets": [
+          "env",
+          "stage-2"
+        ],
+        "plugins": [
+          "istanbul"
+        ]
+      }
     }
   },
   "eslintConfig": {
@@ -113,27 +121,14 @@
     }
   },
   "jest": {
-    "rootDir": ".",
-    "globals": {
-      "__DEV__": true
-    },
-    "transform": {
-      ".*": "<rootDir>/node_modules/babel-jest"
-    },
-    "setupTestFrameworkScriptFile": "./test/bootstrap.js",
-    "testRegex": "./test/.*.spec.jsx?$",
+    "testMatch":  [
+      "**/__tests__/?(*.)(spec|test).js?(x)"
+    ],
     "collectCoverageFrom": [
       "src/*.js",
       "!src/index.js"
     ]
   },
-  "lint-staged": {
-    "src/**/*.{js,jsx,css,less,scss}": [
-      "prettier-standard",
-      "git add"
-    ]
-  },
-  "</Settings>": "------------------------ End of Foundation Settings ------------------------------",
   "dependencies": {
     "ajv": "^5.2.2",
     "assert": "^1.4.1",
@@ -149,8 +144,6 @@
     "winston-color": "^1.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^5.2.5",
-    "@commitlint/config-conventional": "^5.2.3",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^21.0.2",
@@ -163,9 +156,7 @@
     "babel-preset-jest": "^21.0.2",
     "babel-preset-stage-2": "^6.24.1",
     "codecov": "^2.3.0",
-    "commitizen": "^2.9.6",
     "cross-env": "^5.1.1",
-    "cz-conventional-changelog": "^2.1.0",
     "debug": "^2.6.8",
     "eslint": "^4.2.0",
     "eslint-config-standard": "^10.2.1",
@@ -180,10 +171,8 @@
     "jest-cli": "^21.1.0",
     "koa": "^2.3.0",
     "koa-body": "^2.3.0",
-    "lint-staged": "^6.0.0",
     "nodemon": "^1.11.0",
     "nyc": "^11.0.3",
-    "prettier-standard": "^7.0.3",
     "rimraf": "^2.6.2",
     "set-cookie-parser": "^2.0.0",
     "supertest": "^3.0.0"
