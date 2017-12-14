@@ -31,9 +31,11 @@
     "validation"
   ],
   "scripts": {
-    "precommit": "npm test",
-    "build": "babel -d dist/ src/",
-    "lint": "eslint --ext=.js src test",
+    "precommit": "lint-staged",
+    "commit": "git-cz",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "build": "babel -d build/ src/",
+    "lint": "eslint --ext=.js src",
     "test": "cross-env DEBUG={dekoa} BABEL_ENV=testing jest --no-cache --forceExit --coverage",
     "test:watch": "npm test -- --watch --watchExtensions js,jsx",
     "precodecov": "npm run test",
@@ -44,8 +46,9 @@
     "postpatch": "npm run push",
     "minor": "npm version minor",
     "postminor": "npm run push",
-    "push": "git push && git push --tags && npm publish"
+    "push": "git push --follow-tags origin master && npm publish"
   },
+  "<Settings>": "------------------------------ Foundation Settings ------------------------------",
   "babel": {
     "presets": [
       [
@@ -56,72 +59,51 @@
           }
         }
       ],
-      "jest",
-      "stage-2"
+      "jest"
     ],
     "plugins": [
-      "transform-class-properties",
       "transform-decorators-legacy",
-      "transform-decorators",
+      "transform-class-properties",
       "transform-runtime",
       [
         "module-resolver",
         {
           "root": [
             "./src"
-          ],
-          "alias": {
-            "test": "./test"
-          }
+          ]
         }
       ]
-    ],
-    "comments": false,
-    "env": {
-      "test": {
-        "presets": [
-          "env",
-          "stage-2"
-        ],
-        "plugins": [
-          "istanbul"
-        ]
-      }
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
     }
   },
   "eslintConfig": {
     "root": true,
-    "extends": "standard",
     "parser": "babel-eslint",
-    "parserOptions": {
-      "sourceType": "module"
-    },
     "env": {
-      "jest": true
+      "jest/globals": true
     },
+    "extends": "standard",
     "plugins": [
-      "import"
-    ],
-    "settings": {
-      "import/resolver": {
-        "babel-module": {}
-      }
-    },
-    "rules": {
-      "class-methods-use-this": 0,
-      "import/prefer-default-export": 0,
-      "import/no-extraneous-dependencies": 0,
-      "import/no-unresolved": [
-        2,
-        {
-          "commonjs": true
-        }
-      ],
-      "space-before-function-paren": 0
-    }
+      "jest"
+    ]
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,css,less,scss}": [
+      "prettier-standard",
+      "git add"
+    ]
   },
   "jest": {
-    "testMatch":  [
+    "testMatch": [
       "**/__tests__/?(*.)(spec|test).js?(x)"
     ],
     "collectCoverageFrom": [
@@ -129,6 +111,7 @@
       "!src/index.js"
     ]
   },
+  "</Settings>": "------------------------ End of Foundation Settings ------------------------------",
   "dependencies": {
     "ajv": "^5.2.2",
     "assert": "^1.4.1",
@@ -144,6 +127,8 @@
     "winston-color": "^1.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^5.2.5",
+    "@commitlint/config-conventional": "^5.2.3",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^21.0.2",
@@ -154,9 +139,10 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-jest": "^21.0.2",
-    "babel-preset-stage-2": "^6.24.1",
-    "codecov": "^2.3.0",
+    "codecov": "^3.0.0",
+    "commitizen": "^2.9.6",
     "cross-env": "^5.1.1",
+    "cz-conventional-changelog": "^2.1.0",
     "debug": "^2.6.8",
     "eslint": "^4.2.0",
     "eslint-config-standard": "^10.2.1",
@@ -171,8 +157,10 @@
     "jest-cli": "^21.1.0",
     "koa": "^2.3.0",
     "koa-body": "^2.3.0",
+    "lint-staged": "^6.0.0",
     "nodemon": "^1.11.0",
     "nyc": "^11.0.3",
+    "prettier-standard": "^7.0.3",
     "rimraf": "^2.6.2",
     "set-cookie-parser": "^2.0.0",
     "supertest": "^3.0.0"
