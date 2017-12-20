@@ -43,13 +43,11 @@
     "codecov": "codecov",
     "postcodecov": "rimraf coverage",
     "[VERSION]": "======= Semantic Versioning =======",
-    "patch": "npm version patch",
-    "postpatch": "npm run push",
-    "minor": "npm version minor",
-    "postminor": "npm run push",
-    "push": "git push --follow-tags origin master && npm publish"
+    "push": "git push --follow-tags origin master && npm publish",
+    "release": "standard-version --no-verify",
+    "postrelease": "npm run push"
   },
-  "<Settings>": "------------------------------ Foundation Settings ------------------------------",
+  "<Settings>": "------------------------------ Application Settings ------------------------------",
   "babel": {
     "presets": [
       [
@@ -112,7 +110,7 @@
       "!src/index.js"
     ]
   },
-  "</Settings>": "------------------------ End of Foundation Settings ------------------------------",
+  "</Settings>": "------------------------ End of Application Settings ------------------------------",
   "dependencies": {
     "ajv": "^5.2.2",
     "assert": "^1.4.1",
@@ -124,6 +122,7 @@
     "immutable": "^3.8.1",
     "keymirror": "^0.1.1",
     "koa-router": "^7.2.1",
+    "standard-version": "^4.2.0",
     "stream": "^0.0.2",
     "winston-color": "^1.0.0"
   },
