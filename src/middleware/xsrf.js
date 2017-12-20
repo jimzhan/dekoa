@@ -11,14 +11,17 @@ const xsrfHeaderName = 'X-XSRF-Token'
 const XSRF = (secret, options = {}) => {
   assert(secret, 'XSRF secret is missing')
 
-  const settings = Object.assign({
-    xsrfCookieName,
-    xsrfHeaderName,
-    invalidTokenMessage: 'Invalid XSRF Token',
-    invalidTokenStatusCode: Status.FORBIDDEN,
-    excludedMethods: [ 'GET', 'HEAD', 'OPTIONS', 'TRACE' ],
-    renewPostWrite: false
-  }, options)
+  const settings = Object.assign(
+    {
+      xsrfCookieName,
+      xsrfHeaderName,
+      invalidTokenMessage: 'Invalid XSRF Token',
+      invalidTokenStatusCode: Status.FORBIDDEN,
+      excludedMethods: ['GET', 'HEAD', 'OPTIONS', 'TRACE'],
+      renewPostWrite: false
+    },
+    options
+  )
   // --------------------------------------------------
   // *NOTE* Wrapper to `csrf` options.
   // --------------------------------------------------
@@ -31,6 +34,8 @@ const XSRF = (secret, options = {}) => {
   const middleware = async (ctx, next) => {
     ctx.ensureTokenPresent = () => {
       const token = xsrf.create(secret)
+      ctx.set(settings.xsrfHeaderName, token)
+      // TODO Remove Cookie Supports.
       ctx.cookies.set(settings.xsrfCookieName, token, {
         httpOnly: false
       })
@@ -50,7 +55,10 @@ const XSRF = (secret, options = {}) => {
     }
 
     if (!token || !xsrf.verify(secret, token)) {
-      return ctx.throw(settings.invalidTokenStatusCode, settings.invalidTokenMessage)
+      return ctx.throw(
+        settings.invalidTokenStatusCode,
+        settings.invalidTokenMessage
+      )
     }
 
     await next()
