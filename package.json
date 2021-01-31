@@ -114,7 +114,6 @@
   "dependencies": {
     "ajv": "^5.2.2",
     "assert": "^1.4.1",
-    "bcrypt": "^3.0.0",
     "cookie": "^0.3.1",
     "csrf": "^3.0.6",
     "glob": "^7.1.2",
@@ -140,6 +139,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-jest": "^21.0.2",
+    "bcryptjs": "^2.4.3",
     "codecov": "^3.0.0",
     "commitizen": "^2.9.6",
     "cross-env": "^5.1.1",
