@@ -9,7 +9,7 @@ const views = glob.sync(`${__dirname}/resources/*.js`)
 const secret = bcrypt.hashSync('dekoa', 12)
 
 export default class App extends Koa {
-  constructor () {
+  constructor() {
     super()
     this.prefix = '/v1'
     this.use(Body({ multipart: true }))
