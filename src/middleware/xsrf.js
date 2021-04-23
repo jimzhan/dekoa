@@ -18,7 +18,8 @@ const XSRF = (secret, options = {}) => {
       invalidTokenMessage: 'Invalid XSRF Token',
       invalidTokenStatusCode: Status.FORBIDDEN,
       excludedMethods: ['GET', 'HEAD', 'OPTIONS', 'TRACE'],
-      renewPostWrite: false
+      renewPostWrite: false,
+      secure: false
     },
     options
   )
@@ -37,7 +38,8 @@ const XSRF = (secret, options = {}) => {
       ctx.set(settings.xsrfHeaderName, token)
       // TODO Remove Cookie Supports.
       ctx.cookies.set(settings.xsrfCookieName, token, {
-        httpOnly: false
+        httpOnly: false,
+        secure: settings.secure
       })
     }
 
