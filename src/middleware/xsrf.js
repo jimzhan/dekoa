@@ -11,17 +11,20 @@ const xsrfHeaderName = 'X-XSRF-Token'
 const XSRF = (secret, options = {}) => {
   assert(secret, 'XSRF secret is missing')
 
-  const settings = Object.assign(
-    {
-      xsrfCookieName,
-      xsrfHeaderName,
-      invalidTokenMessage: 'Invalid XSRF Token',
-      invalidTokenStatusCode: Status.FORBIDDEN,
-      excludedMethods: ['GET', 'HEAD', 'OPTIONS', 'TRACE'],
-      renewPostWrite: false
-    },
-    options
-  )
+  const defaults = {
+    xsrfCookieName,
+    xsrfHeaderName,
+    invalidTokenMessage: 'Invalid XSRF Token',
+    invalidTokenStatusCode: Status.FORBIDDEN,
+    excludedMethods: ['GET', 'HEAD', 'OPTIONS', 'TRACE'],
+    renewPostWrite: false,
+    cookieAttributes: {
+      httpOnly: false,
+      secure: false
+    }
+  }
+
+  const settings = Object.assign({}, defaults, options)
   // --------------------------------------------------
   // *NOTE* Wrapper to `csrf` options.
   // --------------------------------------------------
@@ -37,7 +40,7 @@ const XSRF = (secret, options = {}) => {
       ctx.set(settings.xsrfHeaderName, token)
       // TODO Remove Cookie Supports.
       ctx.cookies.set(settings.xsrfCookieName, token, {
-        httpOnly: false
+        ...settings.cookieAttributes
       })
     }
 
