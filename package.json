@@ -112,7 +112,7 @@
   },
   "</Settings>": "------------------------ End of Application Settings ------------------------------",
   "dependencies": {
-    "ajv": "^5.2.2",
+    "ajv": "^6.12.3",
     "assert": "^1.4.1",
     "cookie": "^0.3.1",
     "csrf": "^3.0.6",
